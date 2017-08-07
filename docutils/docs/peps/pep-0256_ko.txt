@@ -1,127 +1,74 @@
 PEP: 256
-Title: Docstring Processing System Framework
-Version: $Revision$
-Last-Modified: $Date$
-Author: David Goodger <goodger@python.org>
-Discussions-To: <doc-sig@python.org>
-Status: Draft
-Type: Standards Track
-Content-Type: text/x-rst
-Created: 01-Jun-2001
-Post-History: 13-Jun-2001
+제목: Docstring Processing System Framework
+버전: $Revision$
+수정날짜: $Date$
+저자: David Goodger <goodger@python.org>
+토론-연락: <doc-sig@python.org>
+상태: Draft
+타입: Standards Track
+내용-타입: text/x-rst
+생성날짜: 01-Jun-2001
+포스팅-날짜: 13-Jun-2001
 
 
-Abstract
+개요
 ========
 
-Python lends itself to inline documentation.  With its built-in
-docstring syntax, a limited form of `Literate Programming`_ is easy to
-do in Python.  However, there are no satisfactory standard tools for
-extracting and processing Python docstrings.  The lack of a standard
-toolset is a significant gap in Python's infrastructure; this PEP aims
-to fill the gap.
+Python은 인라인 도큐멘테이션이 가능하다. Python에서는 내재된 docstring 문법을 이용하여 제한된 형태의 `Literate Programming`_ (쉽게 읽히는 프로그래밍)이 쉽게 구현 가능하다. 그러나 Python의 docstring을 추출하고 처리하기 위한 만족스러운 표준 도구는 아직 없으며, 이 PEP는 이러한 표준의 부재로 인한 문제점을 해결하기 위한 것이다.
 
-The issues surrounding docstring processing have been contentious and
-difficult to resolve.  This PEP proposes a generic Docstring
-Processing System (DPS) framework, which separates out the components
-(program and conceptual), enabling the resolution of individual issues
-either through consensus (one solution) or through divergence (many).
-It promotes standard interfaces which will allow a variety of plug-in
-components (input context readers, markup parsers, and output format
-writers) to be used.
+Docstring의 처리와 관련된 문제는 쟁점이 되어왔으며 해결하기 또한 어렵다. 이 PEP에서는 일반적인 Docstring Processing System (DPS) 프레임워크를 제안한다. 이는 구성 요소(프로그램과 개념)를 분리함으로써, 합의(단일 해결책) 또는 분기(여러 해결책)를 통하여 각 문제를 해결할 수 있으며, 또한 다양한 플러그인(input context reader, markup parser, output format writer)을 사용할 수 있는 표준 인터페이스를 장려한다.
 
-The concepts of a DPS framework are presented independently of
-implementation details.
+DPS 프레임워크의 개념은 구현 방법과는 독립적으로 제공된다.
 
 
-Road Map to the Docstring PEPs
+Docstring PEP에 대한 로드맵
 ==============================
 
-There are many aspects to docstring processing.  The "Docstring PEPs"
-have broken up the issues in order to deal with each of them in
-isolation, or as close as possible.  The individual aspects and
-associated PEPs are as follows:
+Docstring 처리에는 여러가지 측면이 있다. "Docstring PEP"는 각 이슈들을 독립적으로 해결하기 위해 이슈들을 나누었다. 관련된 PEP들은 다음과 같다.
 
-* Docstring syntax.  PEP 287, "reStructuredText Docstring Format"
-  [#PEP-287]_, proposes a syntax for Python docstrings, PEPs, and
-  other uses.
+* Docstring 문법. PEP 287, "reStructuredText Docstring Format"
+  [#PEP-287]_, 은 Python docstring, PEP 등을 위한 문법을 제시한다.
+  
 
-* Docstring semantics consist of at least two aspects:
+* Docstring 의미론. 다음과 같은 최소 두가지 측면이 있다:
 
-  - Conventions: the high-level structure of docstrings.  Dealt with
-    in PEP 257, "Docstring Conventions" [#PEP-257]_.
+  - 규약: Docstring의 하이레벨 구조. PEP 257, "Docstring Conventions" [#PEP-257]_ 에서 다루어진다.
 
-  - Methodology: rules for the informational content of docstrings.
-    Not addressed.
+  - 방법론: Docstring의 내용에 대한 규칙들. 아직 거론되지 않는다.
 
-* Processing mechanisms.  This PEP (PEP 256) outlines the high-level
-  issues and specification of an abstract docstring processing system
-  (DPS).  PEP 258, "Docutils Design Specification" [#PEP-258]_, is an
-  overview of the design and implementation of one DPS under
-  development.
+* 처리 메커니즘. 이 PEP (PEP 256)에는 DPS의 조건과 하이레벨에서의 문제들이 요약되어 있다. PEP 258, "Docutils Design Specification"[# PEP-258]_, 은 현재 개발중인 DPS의 설계 및 구현에 대한 개요이다.
 
-* Output styles: developers want the documentation generated from
-  their source code to look good, and there are many different ideas
-  about what that means.  PEP 258 touches on "Stylist Transforms".
-  This aspect of docstring processing has yet to be fully explored.
+* 출력 스타일 : 개발자는 소스 코드에서 생성 된 도큐멘테이션을 보기 좋게 만들기를 원하며 그게 무엇을 의미하는지는 여러 가지 의견이 있다. PEP 258은 "Stylist Transforms"를 다루고 있다. Docstring 처리의 이러한 측면은 아직 추가적인 분석이 필요하다.
 
-By separating out the issues, we can form consensus more easily
-(smaller fights ;-), and accept divergence more readily.
+이슈들을 분리함으로써, 우리는 더 쉽게 합의점에 이를 수 있고, 다양성을 더 쉽게 받아 들일 수있다.
 
 
-Rationale
-=========
+이론적 근거
+===========
 
-There are standard inline documentation systems for some other
-languages.  For example, Perl has POD_ ("Plain Old Documentation") and
-Java has Javadoc_, but neither of these mesh with the Pythonic way.
-POD syntax is very explicit, but takes after Perl in terms of
-readability.  Javadoc is HTML-centric; except for "``@field``" tags,
-raw HTML is used for markup.  There are also general tools such as
-Autoduck_ and Web_ (Tangle & Weave), useful for multiple languages.
+다른 언어에는 이미 표준 인라인 도큐멘테이션 시스템이 있다. 예를 들어, Perl은 POD_ ( "Plain Old Documentation")를 가지고 있고 Java는 Javadoc_ 을 가지고 있지만 이 두가지 방식은 Pythonic하지 않기에 Python에서 사용하기에는 적합하지 않다. POD 문법은 매우 명확하지만 가독성이 떨어지며, Javadoc은 매우 HTML적이다. "``@ field``"태그를 제외하고는 HTML이 마크 업에 사용된다. 또한 Autoduck_ 및 Web_ (Tangle & Weave)과 같은 여러 언어에 쓰이는 일반적인 도구가 있기도 하다.
 
-There have been many attempts to write auto-documentation systems
-for Python (not an exhaustive list):
+파이썬에 대한 자동 도큐멘테이션 시스템을 만들려는 다음과 같은 많은 시도가 있었다:
 
-- Marc-Andre Lemburg's doc.py_
+- Marc-Andre Lemburg의 doc.py_
 
-- Daniel Larsson's pythondoc_ & gendoc_
+- Daniel Larsson의 pythondoc_ & gendoc_
 
-- Doug Hellmann's HappyDoc_
+- Doug Hellmann의 HappyDoc_
 
-- Laurence Tratt's Crystal (no longer available on the web)
+- Laurence Tratt의 Crystal (더 이상 웹에서 볼 수 없음)
 
-- Ka-Ping Yee's pydoc_ (pydoc.py is now part of the Python standard
-  library; see below)
+- Ka-Ping Yee의 pydoc_ (pydoc.py는 이제 Python 의 표준 라이브러리의 일부이다. 아래 참조)
 
-- Tony Ibbs' docutils_ (Tony has donated this name to the `Docutils
-  project`_)
+- Tony Ibbs의 docutils_ (Tony는이 이름을 `Docutils project`_ 에 기부하였음)
 
-- Edward Loper's STminus_ formalization and related efforts
+- Edward Loper의 STminus_ 공식화 및 관련 노력들
 
-These systems, each with different goals, have had varying degrees of
-success.  A problem with many of the above systems was over-ambition
-combined with inflexibility.  They provided a self-contained set of
-components: a docstring extraction system, a markup parser, an
-internal processing system and one or more output format writers with
-a fixed style.  Inevitably, one or more aspects of each system had
-serious shortcomings, and they were not easily extended or modified,
-preventing them from being adopted as standard tools.
+각기 다른 목표를 가진 위의 여러 시스템은 다양한 수준의 성공을 거두었다. 대부분의 시스템은 지나친 야망과 부족한 유연성으로 인해 여러 문제점을 가지고 있다. 그들은 독립된 세트로 docstring 추출 시스템, markup parser, 내부 처리 시스템, 고정 된 스타일을 가진 output format writer를 모두 포함하여 제공했다. 필연적으로 각 시스템에서는 하나 이상의 심각한 단점이 있었으며, 쉽게 확장하거나 수정하지 못하여 표준 도구로 채택되는데 방해가 되었다.
 
-It has become clear (to this author, at least) that the "all or
-nothing" approach cannot succeed, since no monolithic self-contained
-system could possibly be agreed upon by all interested parties.  A
-modular component approach designed for extension, where components
-may be multiply implemented, may be the only chance for success.
-Standard inter-component APIs will make the DPS components
-comprehensible without requiring detailed knowledge of the whole,
-lowering the barrier for contributions, and ultimately resulting in a
-rich and varied system.
+그 어떠한 단일한 시스템도 모든 이해 당사자들의 지지를 얻기 힘들기 때문에 "모 아니면 도"식으로 접근하는 방식은 옳지 못하다. 확장을 염두에 둔 모듈방식이 유일한 해결책이라고 볼 수 있다. 구성요소 간 표준 API는 전체에 대한 상세한 지식 없이도 DPS 구성요소의 이해를 가능하게 하며, 기여에 대한 장벽을 낮추고, 궁극적으로 풍부한 시스템을 만들 수 있게 해준다.
 
-Each of the components of a docstring processing system should be
-developed independently.  A "best of breed" system should be chosen,
-either merged from existing systems, and/or developed anew.  This
-system should be included in Python's standard library.
+따라서 DPS의 각 구성 요소는 독립적으로 개발되어야하며, 최상의 시스템은 "선택"을 통해 만들어져야 한다. 이는 기존 시스템과 통합되거나 새롭게 개발되어야한다. 이 시스템은 Python의 표준 라이브러리에 포함되어야 한다.
 
 
 PyDoc & Other Existing Systems
