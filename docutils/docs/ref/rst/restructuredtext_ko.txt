@@ -1873,77 +1873,69 @@ admonition_ (주석, 경고 등)은 다른 본문 요소를 포함한다::
 
        - 여기에 bullet list가 위치한다.
 
-Directives는 explicit markup start (".. ") followed
-by the directive type, two colons, and whitespace (together called the
-"directive marker").  Directive types are case-insensitive single
-words (alphanumerics plus isolated internal hyphens, underscores,
-plus signs, colons, and periods; no whitespace).  Two colons are used
-after the directive type for these reasons:
+Directives는 explicit markup start (".. ")와 directive 타입, 콜론 두 개
+공백 문자로 표시되며 다 합쳐서 "directive marker"라고 부르게 된다.
+Directive types는 대소문자를 구분하지 않는 한 단어로 (공백 없이 문자, 숫자, 하이픈,
+언더스코어 기호, 콜론, 마침표로 구성) 이루어져있다. directive type 다음에는
+아래와 같은 이유 때문에 콜론을 두 개 써준다.
 
-- Two colons are distinctive, and unlikely to be used in common text.
+- 일반적인 텍스트에서 쓰이는 것과 달리 콜론 두 개는 구분되기 쉽다.
 
-- Two colons avoids clashes with common comment text like::
+- 콜론 두 개는 아래와 같은 일반적인 코맨트 텍스트와 충돌을 일으키지 않는다::
 
       .. Danger: modify at your own risk!
 
-- If an implementation of reStructuredText does not recognize a
-  directive (i.e., the directive-handler is not installed), a level-3
-  (error) system message is generated, and the entire directive block
-  (including the directive itself) will be included as a literal
-  block.  Thus "::" is a natural choice.
+- reStructuredText 구현이 directive를 인식하지 못하면 (죽, directive-handler가
+  설치되어 있지 않으면), level-3 (에러) 시스템 메세지가 발생할 것이다.
+  그리고 directive를 포함한 전체 directive 블럭이 literal block에 포함될 것이다.
+  따라서 "::"가 당연히 선택된 것이다.
 
-The directive block is consists of any text on the first line of the
-directive after the directive marker, and any subsequent indented
-text.  The interpretation of the directive block is up to the
-directive code.  There are three logical parts to the directive block:
+directive block은 directive marker 다음부터 시작되며 이후에는 들여쓰기된 텍스트
+가 이어진다. directive block의 해석은 directive code에 달려있다.
+directive block에는 세가지 논리 파트가 있다:
 
 1. Directive arguments.
 2. Directive options.
-3. Directive content.
+3. Directive contents.
 
-Individual directives can employ any combination of these parts.
-Directive arguments can be filesystem paths, URLs, title text, etc.
-Directive options are indicated using `field lists`_; the field names
-and contents are directive-specific.  Arguments and options must form
-a contiguous block beginning on the first or second line of the
-directive; a blank line indicates the beginning of the directive
-content block.  If either arguments and/or options are employed by the
-directive, a blank line must separate them from the directive content.
-The "figure" directive employs all three parts::
+각각의 directives는 이 파트를 조합해서 사용할 수 있다. Directive arguments는
+파일 시스팀 경로(path), URL, 제목 텍스트 등이 올 수 있다. Directive options은
+`field lists`_ 를 써서 표시된다; 필드 이름과 컨텐츠는 directive에 한정되어 있다.
+Arguments와 options은 directive의 첫 번째나 두 번째 줄에서 시작하는 연속 블럭이
+되어야 한다; 공백 행은 directive content block의 시작을 의미한다.
+만약 arguments나 options이 directive에 의해 사용되었으면, 반드시 공백 행으로
+directive content와 분리시켜야 한다. "figure"는 세 파트를 모두 사용한다::
 
     .. figure:: larch.png
        :scale: 50
 
        The larch.
 
-Simple directives may not require any content.  If a directive that
-does not employ a content block is followed by indented text anyway,
-it is an error.  If a block quote should immediately follow a
-directive, use an empty comment in-between (see Comments_ below).
+단순한 directives는 content가 필요하지 않다. content 블럭을 사용하지 않는
+directive 다음에 들여쓰기된 텍스트가 오게 되면 에러가 발생한다.
+만약 directive 바로 다음에 블럭 인용이 와야 하는 경우 사이에 빈 comment를
+사용하라 (아래의 Comments_ 참고).
 
-Actions taken in response to directives and the interpretation of text
-in the directive content block or subsequent text block(s) are
-directive-dependent.  See `reStructuredText Directives`_ for details.
+directives에 대한 응답으로 취해진 조치와 directive content 블럭 또는
+후속 텍스트 블럭에 있는 텍스트의 해석은 directive에 의존한다.
+자세한 내용은 `reStructuredText Directives`_ 를 참고하라.
 
-Directives are meant for the arbitrary processing of their contents,
-which can be transformed into something possibly unrelated to the
-original text.  It may also be possible for directives to be used as
-pragmas, to modify the behavior of the parser, such as to experiment
-with alternate syntax.  There is no parser support for this
-functionality at present; if a reasonable need for pragma directives
-is found, they may be supported.
+Directives content를 임의로 처리하기 위한 것이며, 원본 텍스트와 상관이 없는
+것으로 변형시킬 수도 있다. directives는 대체 구문을 시험하는 것처럼
+파서의 작동을 수정하기 위한 프라그마(pragma)로 사용될 수 있다.
+이 기능을 위한 파서 지원은 없다; 프라그마 directive를 위한 합당한 필요성이
+발견되면 추후에 지원될 수도 있다.
 
-Directives do not generate "directive" elements; they are a *parser
-construct* only, and have no intrinsic meaning outside of
-reStructuredText.  Instead, the parser will transform recognized
-directives into (possibly specialized) document elements.  Unknown
-directives will trigger level-3 (error) system messages.
+Directives 는 "directive" 요소를 생성하지는 않는다; 이것은 단지
+*파서 구조* 일 뿐이며 reStructuredText 외부에서는 본질적인 의미가 없다.
+대신 파서는 인식된 directives를 (한정된) 문서 요소로 변형한다. 알 수 없는
+directives는 level-3 (에러) 시스템 메세지를 발생시킨다.
 
 Syntax diagram::
 
     +-------+-------------------------------+
-    | ".. " | directive type "::" directive |
-    +-------+ block                         |
+    | ".. " | directive 타입 "::" directive |
+    +-------+ 블럭                          |
             |                               |
             +-------------------------------+
 
@@ -1953,92 +1945,81 @@ Substitution Definitions
 
 Doctree element: substitution_definition.
 
-Substitution definitions are indicated by an explicit markup start
-(".. ") followed by a vertical bar, the substitution text, another
-vertical bar, whitespace, and the definition block.  Substitution text
-may not begin or end with whitespace.  A substitution definition block
-contains an embedded inline-compatible directive (without the leading
-".. "), such as "image_" or "replace_".  For example::
+대체 정의는 explicit markup start (".. ")와, 수직 막대, 대체 텍스트,
+수직 막대, 공백문자, 정의 블럭으로 구성되어 있다. 대체 텍스트는
+공백 문자로 시작하고 끝날 필요는 없다. 대체 정의 블럭은 (앞에 ".." 없이)
+"image_"나 "replace_" 같이 임베딩 된 인라인 호환 directve를 포함할 수 있다::
 
-    The |biohazard| symbol must be used on containers used to
-    dispose of medical waste.
+    |biohazard| 기호는 의료 폐기물을 버리는 컨테이너에 쓰여야 한다.
 
     .. |biohazard| image:: biohazard.png
 
-It is an error for a substitution definition block to directly or
-indirectly contain a circular substitution reference.
+대체 정의 블럭이 직접적 혹은 간접적으로 순환 대체 참조를 포함하고 있을 경우
+에러가 발생한다.
 
-`Substitution references`_ are replaced in-line by the processed
-contents of the corresponding definition (linked by matching
-substitution text).  Matches are case-sensitive but forgiving; if no
-exact match is found, a case-insensitive comparison is attempted.
+`Substitution references`_ 는 매칭되는 대체 텍스트와 연결된 정의의 처리된
+컨텐츠로 라인 안에서 대체 된다. 매칭은 대소문자를 구별해서 이루어지지만
+정확히 매치되는 것이 없는 경우 대소문자구분 없이 이루어진다.
 
-Substitution definitions allow the power and flexibility of
-block-level directives_ to be shared by inline text.  They are a way
-to include arbitrarily complex inline structures within text, while
-keeping the details out of the flow of text.  They are the equivalent
-of SGML/XML's named entities or programming language macros.
+대체 정의는 블럭 수준의 directives_ 가 인라인 텍스트로 공유되는 것을 허용한다.
+텍스트 플로우(flow)의 세부적인 부분을 유지하면서 텍스트에 있는 임의의 복잡한
+인라인 구조를 포함시키는 방식으로 이루어진다. 그것들은 SGML/XML의 지정된
+엔티티(entity)와 프로그래밍 언어 매크로(macro)와 같다.
 
-Without the substitution mechanism, every time someone wants an
-application-specific new inline structure, they would have to petition
-for a syntax change.  In combination with existing directive syntax,
-any inline structure can be coded without new syntax (except possibly
-a new directive).
+대체 메커니즘 없이 특수한 용도의 인라인 구조를 원한다면 구분 변경에 대한
+페티션(petition)이 필요하다. 현재 사용되는 directive 구문과 결합한 인라인 구조는
+(새로운 directive를 제외하고) 새로운 구문 없이 코딩될 수 있다.
 
 Syntax diagram::
 
     +-------+-----------------------------------------------------+
-    | ".. " | "|" substitution text "| " directive type "::" data |
-    +-------+ directive block                                     |
+    | ".. " | "|" 대체 텍스트 "| " directive 타입 "::" 데이터       |
+    +-------+ directive 블럭                                      |
             |                                                     |
             +-----------------------------------------------------+
 
-Following are some use cases for the substitution mechanism.  Please
-note that most of the embedded directives shown are examples only and
-have not been implemented.
+아래는 대체 메커니즘에 대한 사용 사례이다. 임베딩된 directive의 대부분은
+예시일 뿐 실제로 구현된 상태는 아니라는 사실을 명심하라.
+
 
 Objects
-    Substitution references may be used to associate ambiguous text
-    with a unique object identifier.
+    대체 참조는 지정되지 않은 텍스트와 교유 객체 식별자(unique object identifier)
+    를 결합킬 때 사용할 수 있다.
 
-    For example, many sites may wish to implement an inline "user"
-    directive::
+    예를 들어, 많은 사이트들은 인라인 "사용자" directive를 구현하기를 원한다::
 
         |Michael| and |Jon| are our widget-wranglers.
 
         .. |Michael| user:: mjones
         .. |Jon|     user:: jhl
 
-    Depending on the needs of the site, this may be used to index the
-    document for later searching, to hyperlink the inline text in
-    various ways (mailto, homepage, mouseover Javascript with profile
-    and contact information, etc.), or to customize presentation of
-    the text (include username in the inline text, include an icon
-    image with a link next to the text, make the text bold or a
-    different color, etc.).
+    사이트의 필요에 따라, 이 것은 검생을 위해 문서를 인덱싱 하거나
+    인라인 텍스트를 다양한 방식으로 (메일투(mailto), 홈페이지,
+    프로파일과 연락처 정보가 있는 자바스크립트 마우스오버(mouseover) 등)
+    하이퍼링크 하거나, 텍스트 표현을 커스터마이징 (유저 이름을 인라인 텍스트에
+    포함시키거나, 링크가 있는 아이콘 이미지를 텍스트 다음에 포함시키거나,
+    텍스트를 굵게 또는 다른 색으로 만드는 등) 할 때 사용될 수 있다.
 
-    The same approach can be used in documents which frequently refer
-    to a particular type of objects with unique identifiers but
-    ambiguous common names.  Movies, albums, books, photos, court
-    cases, and laws are possible.  For example::
+    모호한 명칭이지만 고유 식별자가 있는 특정한 객체를 자주 참조하는
+    문서에도 같은 접근 방식이 사용될 수 있다. 영화, 앨범, 책, 사진
+    소송 사건, 법 등이 가능하다::
 
-        |The Transparent Society| offers a fascinating alternate view
-        on privacy issues.
+        |The Transparent Society| 개인정보 이슈에 대한 매력적인
+        대안을 제시한다.
 
         .. |The Transparent Society| book:: isbn=0738201448
 
-    Classes or functions, in contexts where the module or class names
-    are unclear and/or interpreted text cannot be used, are another
-    possibility::
+    문맥에서 모듈이나 클래스 이름이 명확하지 않고 해석된 텍스트가 사용될 수
+    없는 클래스나 함수는 해석된 텍스트는 다른 가능성이 있다::
 
-        4XSLT has the convenience method |runString|, so you don't
-        have to mess with DOM objects if all you want is the
-        transformed output.
+        4XSLT 는 편리한 |runString| 메서드를 가지고 있다, 따라서
+        변형된 출력을 원하는 것 뿐이라면 DOM 객체를 사용할
+        필요가 없다.
 
         .. |runString| function:: module=xml.xslt class=Processor
 
 Images
-    Images are a common use for substitution references::
+    대체 참조의 가장 일반적인 용도는 이미지다::
 
         West led the |H| 3, covered by dummy's |H| Q, East's |H| K,
         and trumped in hand with the |S| 2.
@@ -2063,29 +2044,27 @@ Images
         .. |-><-| image:: discord.png
         .. _POEE: http://www.poee.org/
 
-    The "image_" directive has been implemented.
+    "image_" directive 는 구현되었다.
 
 Styles [#]_
-    Substitution references may be used to associate inline text with
-    an externally defined presentation style::
+    대체 참조는 인라인 텍스트와 외부적으로 정의된 표현 스타일을
+    결합시키기 위해 사용될 수 있다::
 
-        Even |the text in Texas| is big.
+        심지어 |the text in Texas| 은 크다.
 
         .. |the text in Texas| style:: big
 
-    The style name may be meaningful in the context of some particular
-    output format (CSS class name for HTML output, LaTeX style name
-    for LaTeX, etc), or may be ignored for other output formats (such
-    as plaintext).
+    스타일의 이름은 특정한 출력 형식의 context에서는 의미가 있거나 (HTML 출력을
+    위한 CSS 클래스 이름, LaTeX 을 위한 LaTex 스타일 이름 등), 일반 텍스트 같은
+    다른 출력 포멧에서는 무시될 수 있다.
 
-    .. @@@ This needs to be rethought & rewritten or removed:
+    .. @@@ 이것은 다시 생각하고 작성하거나 제거되어야 한다:
 
-       Interpreted text is unsuitable for this purpose because the set
-       of style names cannot be predefined - it is the domain of the
-       content author, not the author of the parser and output
-       formatter - and there is no way to associate a style name
-       argument with an interpreted text style role.  Also, it may be
-       desirable to use the same mechanism for styling blocks::
+       해석된 텍스트는 이 목적으로 적합하지는 않다. 왜냐하면 스타일 이름의
+       집합이 미리 정의될 수 없기 때문이다. 이것은 파서나 출력 포매터(formatter)
+       의 영역이 아니라 content 작성자의 영역이다. 그리고 스타일 이름
+       아규먼트와 해석된 텍스트 스타일 역할을 결합시킬 방법은 없다.
+       또한 스타일링 블럭에 같은 메커니즘을 사용하는 것이 적합할 수 있다::
 
            .. style:: motto
               At Bob's Underwear Shop, we'll do anything to get in
@@ -2094,52 +2073,45 @@ Styles [#]_
            .. style:: disclaimer
               All rights reversed.  Reprint what you like.
 
-    .. [#] There may be sufficient need for a "style" mechanism to
-       warrant simpler syntax such as an extension to the interpreted
-       text role syntax.  The substitution mechanism is cumbersome for
-       simple text styling.
+    .. [#] 해석된 텍스트 역할 구문을 확장하는 것처럼 더 간단한 구문을
+       보장하기 "스타일" 메커니즘이 충분히 필요할 수 있다. 대체 메커니즘은
+       간단한 텍스트 스타일링에는 복잡한 방식이다.
 
 Templates
-    Inline markup may be used for later processing by a template
-    engine.  For example, a Zope_ author might write::
+    인라인 마크업은 템플릿 엔진에 의해 추후에 처리되기 위해 사용될 수 있다.
+    예를 들어 a Zope_ 작성자는 이렇게 쓸 수 있다::
 
         Welcome back, |name|!
 
         .. |name| tal:: replace user/getUserName
 
-    After processing, this ZPT output would result::
+    처리 후에, 이 ZPT 출력은 아래와 같이 나올 것이다::
 
         Welcome back,
         <span tal:replace="user/getUserName">name</span>!
 
-    Zope would then transform this to something like "Welcome back,
-    David!" during a session with an actual user.
+    Zope는 다음에 세션에서 이것을 "Welcome back, David!"처럼 실제
+    사용자로 변경할 것이다.
 
 Replacement text
-    The substitution mechanism may be used for simple macro
-    substitution.  This may be appropriate when the replacement text
-    is repeated many times throughout one or more documents,
-    especially if it may need to change later.  A short example is
-    unavoidably contrived::
+    대체 매커니즘는 간단한 매크로 치환을 위해서 사용될 수 있다.
+    하나 이상의 문서에서 대체 텍스트가 반복될 때, 특히 나중에 바뀌어야
+    될 필요가 있을 때 유용하다. 간단한 예시가 불가피하게 고안 되었다::
 
-        |RST|_ is a little annoying to type over and over, especially
-        when writing about |RST| itself, and spelling out the
-        bicapitalized word |RST| every time isn't really necessary for
-        |RST| source readability.
+        |RST|_ 는 특히 |RST| 에 대해 쓸 때 계속 타이핑 하는 것을
+        신경쓰이게 만든다. 그리고 매번 bicapitalized 단어를 설명하는
+        것은 |RST| 소스 가독성을 위해서 꼭 필요하지 않다.
 
         .. |RST| replace:: reStructuredText
         .. _RST: http://docutils.sourceforge.net/rst.html
 
-    Note the trailing underscore in the first use of a substitution
-    reference.  This indicates a reference to the corresponding
-    hyperlink target.
+    대체 참조를 처음 사용할 때 언더스코어를 쓰는 것에 주의하라. 이것은
+    대응하는 하이퍼링크 타겟에 대한 참조를 표시해준다.
 
-    Substitution is also appropriate when the replacement text cannot
-    be represented using other inline constructs, or is obtrusively
-    long::
+    대체는 대체 텍스트가 다른 인라인 구조를 사용해서 표현될 수 없을 때나
+    지나치게 길 때 사용하기 적절하다::
 
-        But still, that's nothing compared to a name like
-        |j2ee-cas|__.
+        하지만 |j2ee-cas|__ 같은 이름에 비하면 아무것도 아니다.
 
         .. |j2ee-cas| replace::
            the Java `TM`:super: 2 Platform, Enterprise Edition Client
@@ -2147,7 +2119,7 @@ Replacement text
         __ http://developer.java.sun.com/developer/earlyAccess/
            j2eecas/
 
-    The "replace_" directive has been implemented.
+    "replace_" directive는 구현되어 있다.
 
 
 Comments
@@ -2155,15 +2127,14 @@ Comments
 
 Doctree element: comment.
 
-Arbitrary indented text may follow the explicit markup start and will
-be processed as a comment element.  No further processing is done on
-the comment block text; a comment contains a single "text blob".
-Depending on the output formatter, comments may be removed from the
-processed output.  The only restriction on comments is that they not
-use the same syntax as any of the other explicit markup constructs:
-substitution definitions, directives, footnotes, citations, or
-hyperlink targets.  To ensure that none of the other explicit markup
-constructs is recognized, leave the ".." on a line by itself::
+explicit markup start 다음에 임의로 오는 들여쓰기된 텍스트는 코멘트 요소로
+처리될 것이다. 코멘트 블럭의 텍스트에는 추가적인 처리가 이루어지지 않는다;
+코멘트는 하나의 텍스트 블롭(blob)을 포함하고 있다. 출력 포맷터(formatter)에
+따라 코멘트는 처리된 결과물에서 제거될 수 있다. 코멘트에 대한 단 하나의 제한
+사항은 코멘트는 다른 explicit markup construct (substitution definitions,
+directives, footnotes, citations, or hyperlink targets)와 같은 구문을
+사용하지 않는다는 점이다. 다른 explicit markup construct로 인식되지 않도록
+하려면 ".."만 따로 한 행에 남겨두면 된다::
 
     .. This is a comment
     ..
@@ -2177,17 +2148,17 @@ constructs is recognized, leave the ".." on a line by itself::
 
 .. _empty comments:
 
-An explicit markup start followed by a blank line and nothing else
-(apart from whitespace) is an "_`empty comment`".  It serves to
-terminate a preceding construct, and does **not** consume any indented
-text following.  To have a block quote follow a list or any indented
-construct, insert an unindented empty comment in-between.
+공백 문자를 제외하고 공백 행이 explicit markup start 다음에 오면
+"_`empty comment`"가 된다. 이것은 선행하는 구조를 종료하기 위해 사용되고
+다음에 오는 들여쓰기된 텍스트를 흡수해버리지 않는다. 리스트나 다른 들여쓰기된
+구조 다음에 block quote를 쓰기 위해서는 사이에 들여쓰기 되지 않은 빈 코멘트를
+삽입하라.
 
-Syntax diagram::
+구문 다이어그램::
 
     +-------+----------------------+
-    | ".. " | comment              |
-    +-------+ block                |
+    | ".. " | 코멘트               |
+    +-------+ 블럭                 |
             |                      |
             +----------------------+
 
@@ -2195,50 +2166,47 @@ Syntax diagram::
 Implicit Hyperlink Targets
 ==========================
 
-Implicit hyperlink targets are generated by section titles, footnotes,
-and citations, and may also be generated by extension constructs.
-Implicit hyperlink targets otherwise behave identically to explicit
-`hyperlink targets`_.
+Implicit hyperlink targets은 섹션 제목, 각주, 인용으로 생성되고
+확장 구조에 의해서 생성될 수도 있다. Implicit hyperlink targets은
+explicit `hyperlink targets`_ 과 동일하게 작동한다.
 
-Problems of ambiguity due to conflicting duplicate implicit and
-explicit reference names are avoided by following this procedure:
+중복된 implicit, explicit 참조 이름 충돌로 인한 모호성 문제는
+아래의 절차에 의해 방지된다:
 
-1. `Explicit hyperlink targets`_ override any implicit targets having
-   the same reference name.  The implicit hyperlink targets are
-   removed, and level-1 (info) system messages are inserted.
+1. `Explicit hyperlink targets`_ 는 같은 참조 이름을 가진 implicit targets보다
+   우선한다. 이때 implicit hyperlink targets 은 제거되고 level-1 (info)
+   시스템 메세지가 삽입된다.
 
-2. Duplicate implicit hyperlink targets are removed, and level-1
-   (info) system messages inserted.  For example, if two or more
-   sections have the same title (such as "Introduction" subsections of
-   a rigidly-structured document), there will be duplicate implicit
-   hyperlink targets.
+2. 중복된 implicit hyperlink targets은 제거되고 level-1 (info)
+   시스템 메세지가 삽입된다. 예를 들어, 엄격하게 구조화된(rigidly-structured)
+   문서의 하위 "Introduction" 섹션 같이 둘 이상의 섹션이 같은 제목을 가지고 있으면
+   중복된 하이퍼링크 타겟이 생길 것이다.
 
-3. Duplicate explicit hyperlink targets are removed, and level-2
-   (warning) system messages are inserted.  Exception: duplicate
-   `external hyperlink targets`_ (identical hyperlink names and
-   referenced URIs) do not conflict, and are not removed.
+3. explicit hyperlink targets이 제거되고 level-2 (warning) 시스템 메세지가
+   삽입된다. 예외: (하이퍼링크 타겟과 참조 URI이 동일한) 중복된 `external
+   hyperlink targets`_ 은 충돌을 일으키지 않고 제거되지도 않는다.
 
-System messages are inserted where target links have been removed.
-See "Error Handling" in `PEP 258`_.
+시스템 메세지는 타겟 링크가 제거된 자리에 삽입된다. `PEP 258`_ 의
+"에러 처리(Error Handling)" 부분을 참고하라 .
 
-The parser must return a set of *unique* hyperlink targets.  The
-calling software (such as the Docutils_) can warn of unresolvable
-links, giving reasons for the messages.
+파서는 반드시 "고유한(unique)" 하이퍼 링크 세트를 반환해야 한다. Docutils_ 같은
+호출 소프트웨어는 분석할 수 없는 링크에 대해서 경고 메세지와 메세지에 대한
+원인을 출력한다.
 
 
 Inline Markup
 =============
 
-In reStructuredText, inline markup applies to words or phrases within
-a text block.  The same whitespace and punctuation that serves to
-delimit words in written text is used to delimit the inline markup
-syntax constructs (see the `inline markup recognition rules`_ for
-details).  The text within inline markup may not begin or end with
-whitespace.  Arbitrary `character-level inline markup`_ is supported
-although not encouraged.  Inline markup cannot be nested.
+reStructuredText에서 inline markup은 텍스트 블럭 안에 있는 단어나 구에
+적용된다. 텍스트에서 단어를 구분하기위해 사용되는 공백문자와 구두점은
+인라인 마크업 신택스 구조를 구분하기 위해 똑같이 사용된다 (자세한 내용은
+`inline markup recognition rules`_ 을 참고하라). 인라인 마크업 안에 있는
+텍스트는 공백 문자로 시작하고 끝나지 않아도 된다. 권장되지는 않지만 임의의
+`character-level inline markup`_ 이 지원된다. 인라인 마크업은 nested될
+수 없다.
 
-There are nine inline markup constructs.  Five of the constructs use
-identical start-strings and end-strings to indicate the markup:
+인라인 마크업 구조는 9개가 존재한다. 그중 다섯 개는 마크업을 표시하는
+것과 동일한 시작 스트링과 끝 스트링을 사용한다:
 
 - emphasis_: "*"
 - `strong emphasis`_: "**"
@@ -2246,15 +2214,15 @@ identical start-strings and end-strings to indicate the markup:
 - `inline literals`_: "``"
 - `substitution references`_: "|"
 
-Three constructs use different start-strings and end-strings:
+3개의 구조는 다른 시작 스트링과 끝 스트링을 사용한다:
 
 - `inline internal targets`_: "_`" and "`"
 - `footnote references`_: "[" and "]_"
 - `hyperlink references`_: "`" and "\`_" (phrases), or just a
   trailing "_" (single words)
 
-`Standalone hyperlinks`_ are recognized implicitly, and use no extra
-markup.
+`Standalone hyperlinks`_ 는 내부적으로 인식되고, 추가적인 마크업을
+사용하지 않는다.
 
 Inline markup recognition rules
 -------------------------------
