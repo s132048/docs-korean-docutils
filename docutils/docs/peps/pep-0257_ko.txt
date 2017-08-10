@@ -1,15 +1,18 @@
-PEP: 257
-제목: Docstring Conventions
-버전: $Revision$
-마지막-수정: $Date$
-저자: David Goodger <goodger@python.org>, Guido van Rossum <guido@python.org>
-토론-연락: doc-sig@python.org
-상태: Active
-유형: Informational
-정보-유형: text/x-rst
-생성날짜: 29-May-2001
-포스팅-날짜: 13-Jun-2001
+﻿=================================
+PEP 257 -- Docstring Conventions
+=================================
+:PEP: 257
+:버전: $Revision$
+:마지막-수정: $Date$
+:저자: David Goodger <goodger@python.org>, Guido van Rossum <guido@python.org>
+:토론-연락: doc-sig@python.org
+:상태: Active
+:유형: Informational
+:정보-유형: text/x-rst
+:생성날짜: 29-May-2001
+:포스팅-날짜: 13-Jun-2001
 
+.. contents::
 
 개요
 ========
@@ -37,9 +40,9 @@ Docstring이란 무엇인가?
 
 Docstring은 module, function, class, method 내에 첫 번째로 오는 string literal이다. 그러한 docstring은 그 객체의 ``__doc__`` 특수 속성이 된다.
 
-모든 module, function, class는 일반적으로 docstring이 있어야 하며 public method(``__init__`` constructor 포함)에도 docstring은 있어야 한다. Package 또한 package directory에 있는 ``__init __. py`` 파일의 module docstring에 의해 documentation이 가능하다.
+모든 module, function, class는 일반적으로 docstring이 있어야 하며 public method(``__init__`` constructor 포함)에도 docstring은 있어야 한다. Package 또한 package directory에 있는 ``__init __.py`` 파일의 module docstring에 의해 documentation이 가능하다.
 
-Python 코드 다른 곳에서의 string literal 또한 documentation으로 이용 될 수 있다. 이들은 Python bytecode compiler에 의해 인식되지 않고 runtime 객체 속성으로는 접근 할 수 없다. (즉 ``__doc__`` 에 할당되지 않는다) 하지만 소프트웨어 도구에 의해 두 종류의 docstring 추출이 가능하다.
+Python 코드 다른 곳에서의 string literal 또한 documentation으로 이용 될 수 있다. 이들은 Python bytecode compiler에 의해 인식되지 않고 runtime 객체 속성으로는 접근 할 수 없다 (즉 ``__doc__`` 에 할당되지 않는다). 하지만 소프트웨어 도구에 의해 두 종류의 docstring 추출이 가능하다.
 
 1. Module, class, ``__init__`` method 선언 직후에 오는 string literal은 "속성(attribute) docstring"이라고 한다.
 
@@ -71,7 +74,7 @@ One-line docstring은 한줄에 전부 들어가야 한다. 예::
 
 - One-line docstring에서는 closing quote와 opening quote가 같은 줄에 있는게 보기 더 좋다.
 
-- Docstring 앞뒤에 공백행이 없다.
+- Docstring 앞뒤에 blank line이 없다.
 
 - Docstring은 function이나 method의 기능을 설명하는 마침표로 끝나는 문장이다.
 
@@ -91,19 +94,19 @@ One-line docstring은 한줄에 전부 들어가야 한다. 예::
 Multi-line Docstring
 ----------------------
 
-Multi-line docstring은 우선 요약줄이 오고, 그 다음 blank line이 오며, 그 이후 보다 자세한 설명이 이어진다. 요약줄은 automatic indexing tool에서 사용 가능하다. 요약줄은 한줄 안에 들어가야 하고 나머지 내용과는 blank line으로 분리되어야 한다. 요약줄은 opening quote와 같은 줄에 있을 수도 있고 다음 줄에 있을 수도 있다. 전체 docstring은 첫번째 줄의 quote와 똑같이 indent를 한다. (아래 예제 참조)
+Multi-line docstring은 우선 요약줄이 오고, 그 다음 blank line이 오며, 그 이후 보다 자세한 설명이 이어진다. 요약줄은 automatic indexing tool에서 사용 가능하다. 요약줄은 한줄 안에 들어가야 하고 나머지 내용과는 blank line으로 분리되어야 한다. 요약줄은 opening quote와 같은 줄에 있을 수도 있고 다음 줄에 있을 수도 있다. 전체 docstring은 첫번째 줄의 quote와 똑같이 indent를 한다 (아래 예제 참조).
 
 모든 class의 docstring에는 앞뒤로 blank line이 있어야 한다. 이는 Python에서 class의 스타일에 부합하는 형식이다. Function이나 method의 docstring에는 이러한 요구사항이 있지는 않으나, 만약 function이나 method 내부가 blank line을 이용한 부분들로 구분되어 있다면 거기에 맞춰 function이나 method의 docstring에도 앞뒤로 blank line을 넣는게 좋다.
 
 Script의 docstring은 올바르지 않게 또는 "-h"(help) 옵션과 함께 호출 되었을 때 인쇄되는 "사용법" 메시지로 쓰여야 한다. 이러한 docstring은 script의 기능과 명령어 syntax, environment variable 및 파일을 설명해야 한다. 사용법 메시지는 정교할 수도 있고 아니면 모든 옵션과 argument에 대한 간단한 참조만 될 수도 있다.
 
-Module의 docstring은 일반적으로 전달되는 module의 모든 class, exception, function을 각각 한줄로 요약하여 나열해야 한다. Package의 docstring (즉, 패키지의 ``__init __. py`` module의 docstring)은 package 내부의 module과 subpackage도 나열해야 한다 .
+Module의 docstring은 일반적으로 전달되는 module의 모든 class, exception, function을 각각 한줄로 요약하여 나열해야 한다. Package의 docstring (즉, 패키지의 ``__init __.py`` module의 docstring)은 package 내부의 module과 subpackage도 나열해야 한다 .
 
 Function, method의 docstring은 그 동작을 요약하고 argument, return value, exception 등을 설명해야 한다. Optional argument와 keyword argument 또한 표시해야 한다.
 
 Class의 docstring은 그 동작을 요약하고 public method와 instance variable을 나열해야 한다. Class가 subclass에 의해 쓰이고 subclass에 대한 추가 interface가 있는 경우 이 interface는 별도로 docstring 내부에 나열되어야 한다. Class constructor는 ``__init__`` method의 docstring에 의해 문서화되어야 한다. 개별 method는 자신의 docstring에 의해 문서화되어야 한다.
 
-Class가 subclass로 다른 class의 동작 대부분을 상속하는 경우, docstring에서 이를 언급하고 차이점을 요약해야 한다. Subclass method가 superclass method를 대체하여 superclass method를 호출하지 않을 경우 "override"라는 표현을 사용하며, subclass method가 자체 동작 외에도 superclass method를 추가적으로 호출한다면 "extend"이라는 표현을 사용한다.
+Class가 subclass로 다른 class의 동작 대부분을 상속하는 경우, docstring에서 이를 언급하고 차이점을 요약해야 한다. Subclass method가 superclass method를 대체하여 superclass method를 호출하지 않을 경우 "override"라는 표현을 사용하며, subclass method가 자체 동작 외에도 superclass method를 추가적으로 호출한다면 "extend"라는 표현을 사용한다.
 
 대문자로 function 또는 method의 argument를 언급하는 Emacs 규약을 *사용하여선 안된다*. Python은 대소문자를 구별하기 때문에 docstring은 올바른 argument 이름을 사용해야 한다. 각 argument는 별도의 개별행에 나열하는 것이 좋다. 예를 들면::
 
