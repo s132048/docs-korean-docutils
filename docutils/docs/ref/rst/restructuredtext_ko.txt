@@ -2227,46 +2227,41 @@ reStructuredText에서 inline markup은 텍스트 블럭 안에 있는 단어나
 Inline markup recognition rules
 -------------------------------
 
-Inline markup start-strings and end-strings are only recognized if
-the following conditions are met:
+인라인 마크업 시작 스트링과 끝 스트링은 아래의 조건이 충족되었을 때만
+인식된다:
 
-1. Inline markup start-strings must be immediately followed by
-   non-whitespace.
+1. 인라인 마크업 시작 스트링 바로 다음에 공백 문자가 오지 않는다.
 
-2. Inline markup end-strings must be immediately preceded by
-   non-whitespace.
+2. 인라인 마크업 끝 스트링 바로 앞에 공백 문자가 오지 않는다.
 
-3. The inline markup end-string must be separated by at least one
-   character from the start-string.
+3. inline markup 시작 스트링과 끝 스트링 사이에는 최소한 한 문자가 포함되어야
+   한다.
 
-4. Both, inline markup start-string and end-string must not be preceded by
-   an unescaped backslash (except for the end-string of `inline literals`_).
-   See `Escaping Mechanism`_ above for details.
+4. inline markup 시작 스트링과 끝 스트링 앞에는 `inline literals`_ 의 끝 스트링을
+   제외하고 이스케이프 되지 않은 백슬래쉬가 오면 안 된다. 자세한 내용은
+   `Escaping Mechanism`_ 을 참고하라.
 
-5. If an inline markup start-string is immediately preceded by one of the
-   ASCII characters ``' " < ( [ {`` or a similar
-   non-ASCII character [#openers]_, it must not be followed by the
-   corresponding closing character from ``' " ) ] } >`` or a similar non-ASCII
-   character [#closers]_. (For quotes, matching characters can be any of
-   the `quotation marks in international usage`_.)
+5. inline markup 시작 스트링 바로 앞에 ASCII 문자 ``' " < ( [ {`` 나 유사한
+   non-ASCII 문자 [#openers]_ 가 바로 앞에 오고 바로 뒤에 ``' " ) ] } >`` 또는
+   non-ASCII 문자 [#closers]_ 가 올 수 없다. 따옴표의 경우 `quotation
+   marks in international usage`_ 에서 일치하는 문자일 수 있다.
 
-If the configuration setting `simple-inline-markup`_ is False (default),
-additional conditions apply to the characters "around" the
-inline markup:
+`simple-inline-markup`_ 설정이 False로 되어 있으면 (default), inline markup
+주위에 오는 문자에 대해 추가적인 조건이 적용될 수 있다:
 
-6. Inline markup start-strings must start a text block or be
-   immediately preceded by
+6. Inline markup 시작 스트링은 텍스트 블럭을 시작하거나 아래의 문자 바로 뒤에
+   있어야 한다.
 
-   * whitespace,
-   * one of the ASCII characters ``- : / ' " < ( [ {``
-   * or a similar non-ASCII punctuation character. [#pre-chars]_
+   * 공백 문자,
+   * ASCII 문자 중 하나 ``- : / ' " < ( [ {``
+   * 유사한 non-ASCII 구분 문자. [#pre-chars]_
 
-7. Inline markup end-strings must end a text block or be immediately
-   followed by
+7. Inline markup 끝 스트링은 텍스트 블럭을 종료시키거나 아래의 문자 바로 앞에
+   있어야 한다.
 
-   * whitespace,
-   * one of the ASCII characters ``- . , : ; ! ? \ / ' " ) ] } >``
-   * or a similar non-ASCII punctuation character. [#post-chars]_
+   * 공백 문자,
+   * ASCII 문자 중 하나 ``- . , : ; ! ? \ / ' " ) ] } >``
+   * 유사한 non-ASCII 구분 문자. [#post-chars]_
 
 .. [#openers]    `Unicode categories`_ `Ps` (Open), `Pi` (Initial quote),
                  or `Pf` (Final quote). [#uni-version]_
@@ -2277,9 +2272,8 @@ inline markup:
 .. [#post-chars] Unicode categories  `Pe` (Close), `Pi` (Initial quote),
                  `Pf` (Final quote), `Pd` (Dash), or `Po` (Other). [#uni-version]_
 
-.. [#uni-version] The category of some characters changed with the
-   development of the Unicode standard.
-   Docutils 0.13 uses `Unicode version 5.2.0`_.
+.. [#uni-version] 유니코드 표준의 발전에 따라 일부 문자의 카테고리가 변경되었다.
+   Docutils 0.13은 `Unicode version 5.2.0`_ 를 사용한다.
 
 .. _Unicode categories:
    http://www.unicode.org/Public/5.1.0/ucd/UCD.html#General_Category_Values
@@ -2287,9 +2281,9 @@ inline markup:
 .. _quotation marks in international usage:
    http://en.wikipedia.org/wiki/Quotation_mark,_non-English_usage
 
-The inline markup recognition rules were devised to allow 90% of non-markup
-uses of "*", "`", "_", and "|" without escaping. For example, none of the
-following terms are recognized as containing inline markup strings:
+inline markup 인식 규정은 이스케이핑 없는 "*", "`", "_", "|"의 마크업이 아닌 사용의
+90%를 허용하도록 고안되었다. 예를 들어 아래의 문장들은 inline markup 스트링을 포함하지
+않는 것으로 인식된다:
 
 - 2 * x  a ** b  (* BOM32_* ` `` _ __ | (breaks rule 1)
 - || (breaks rule 3)
@@ -2300,30 +2294,27 @@ following terms are recognized as containing inline markup strings:
 - 2*x a**b O(N**2) e**(x*y) f(x)*f(y) a|b file*.*
   __init__ __init__()  (breaks rule 6)
 
-No escaping is required inside the following inline markup examples:
+아래의 inline markup 예시에서 이스케이핑은 필요하지 않다:
 
 - ``*2 * x  *a **b *.txt*`` (breaks rule 2; renders as "*2 * x  *a **b *.txt*")
 - ``*2*x a**b O(N**2) e**(x*y) f(x)*f(y) a*(1+2)*``
   (breaks rule 7; renders as "*2*x a**b O(N**2) e**(x*y) f(x)*f(y) a*(1+2)*")
 
-It may be desirable to use `inline literals`_ for some of these anyhow,
-especially if they represent code snippets.  It's a judgment call.
+만약 코드 snippets를 표현하기 위해서라면 `inline literals`_ 를 사용하는 것을
+권장한다. 이것은 작성자의 판단에 달렸다.
 
-These cases *do* require either literal-quoting or escaping to avoid
-misinterpretation::
+이 경우 해석이 잘못 되는 것을 막기 위해서 literal-quoting 이나 이스케이핑이 필요하다::
 
     \*4, class\_, \*args, \**kwargs, \`TeX-quoted', \*ML, \*.txt
 
-In most use cases, `inline literals`_ or `literal blocks`_ are the best
-choice (by default, this also selects a monospaced font)::
+대부분의 경우, `inline literals`_ 이나 `literal blocks`_ 을 사용하는 것이 가장
+좋다. default 설정일 때, 한 번에 고정폭 글꼴로 변경된다::
 
     *4, class_, *args, **kwargs, `TeX-quoted', *ML, *.txt
 
-For languages that don't use whitespace between words (e.g. Japanese or
-Chinese) it is recommended to set `simple-inline-markup`_ to True and
-eventually escape inline markup characters.
-The examples breaking rules 6 and 7 above show which constructs may need
-special attention.
+단어 사이에 공백 문자를 사용하지 않는 언어의 경우(일본어, 중국어) `simple-inline-markup`_
+을 True로 설정하고 inline markup을 이스케이프하는 것을 추천한다. 위에 있는 규정 6과 7을
+위반하는 예시는 어떤 구조가 특별한 주의를 요하는지 보여준다.
 
 
 .. _simple-inline-markup: ../../user/config.html#simple-inline-markup
@@ -2332,56 +2323,51 @@ special attention.
 Recognition order
 -----------------
 
-Inline markup delimiter characters are used for multiple constructs,
-so to avoid ambiguity there must be a specific recognition order for
-each character.  The inline markup recognition order is as follows:
+Inline markup 구분자는 여러 구조에 의해서 사용된다 따라서 모호성을 피하기
+위해서 각 문자에 대한 지정된 인식 순서가 있어야 한다. inline markup의 인식
+순서는 다음과 같다:
 
-- Asterisks: `Strong emphasis`_ ("**") is recognized before emphasis_
-  ("*").
+- 별표: `Strong emphasis`_ ("**") 는 emphasis_ ("*") 전에 일어난다.
 
-- Backquotes: `Inline literals`_ ("``"), `inline internal targets`_
-  (leading "_`", trailing "`"), are mutually independent, and are
-  recognized before phrase `hyperlink references`_ (leading "`",
-  trailing "\`_") and `interpreted text`_ ("`").
+- 백 쿼트: `Inline literals`_ ("``")과 `inline internal targets`_
+  (leading "_`", trailing "`")는 상호 독립접이며 `hyperlink references`_
+  (leading "`", trailing "\`_") 와 `interpreted text`_ ("`") 구문 전에
+  인식 된다.
 
-- Trailing underscores: Footnote references ("[" + label + "]_") and
-  simple `hyperlink references`_ (name + trailing "_") are mutually
-  independent.
+- Trailing underscores: 각주 참조 ("[" + label + "]_") 와
+  단순 `hyperlink references`_ (name + trailing "_")는 상호 독립적이다.
 
-- Vertical bars: `Substitution references`_ ("|") are independently
+- 수직 막대: `Substitution references`_ ("|") are independently
   recognized.
 
-- `Standalone hyperlinks`_ are the last to be recognized.
+- `Standalone hyperlinks`_ 는 가장 마지막에 인식된다.
 
 
 Character-Level Inline Markup
 -----------------------------
 
-It is possible to mark up individual characters within a word with
-backslash escapes (see `Escaping Mechanism`_ above).  Backslash
-escapes can be used to allow arbitrary text to immediately follow
-inline markup::
+백슬래쉬 이스케이프가 있는 단어 사이의 개별 문자에 대해 마크업하는 것은 가능
+하다. (위쪽의 `Escaping Mechanism`_ 참고) 백슬래쉬 이스케이프는 임의의 텍스트를
+인라인 마크업을 바로 뒤에 쓰도록 만드는 데 사용할 수 있다::
 
     Python ``list``\s use square bracket syntax.
 
-The backslash will disappear from the processed document.  The word
-"list" will appear as inline literal text, and the letter "s" will
-immediately follow it as normal text, with no space in-between.
+백슬래쉬는 처리된 문서에서 사라질 것이다. 단어 "list"는 inline literal 텍스트로
+나타날 것이고 문자 "s" 일반 텍스트로 스페이스 없이 바로 뒤에 써질 것이다.
 
-Arbitrary text may immediately precede inline markup using
-backslash-escaped whitespace::
+임의의 텍스트는 백슬래쉬 이스케이프 된 공백문자를 사용하는 inline markup 바로
+앞에 위치한다::
 
     Possible in *re*\ ``Structured``\ *Text*, though not encouraged.
 
-The backslashes and spaces separating "re", "Structured", and "Text"
-above will disappear from the processed document.
+"re", "Structured", "Text"를 나누는 스페이스와 공백 문자는 처리된 문서에서
+사라질 것이다.
 
 .. CAUTION::
 
-   The use of backslash-escapes for character-level inline markup is
-   not encouraged.  Such use is ugly and detrimental to the
-   unprocessed document's readability.  Please use this feature
-   sparingly and only where absolutely necessary.
+   문자 수준의 inline markup을 위해 백슬래쉬 이스케이프를 사용하는 것은
+   권장됮 않는다. 이러한 용은 처리되지 않은 문서의 가독성에 좋지 않다.
+   이 기능은 반드시 필요한 곳에서만 사용하라.
 
 
 Emphasis
@@ -2391,11 +2377,11 @@ Doctree element: emphasis.
 
 Start-string = end-string = "*".
 
-Text enclosed by single asterisk characters is emphasized::
+별표 하나로 둘러싸인 단어는 강조된다::
 
-    This is *emphasized text*.
+    이것은 *emphasized text* 이다.
 
-Emphasized text is typically displayed in italics.
+강조된 텍스트는 일반적으로 이탤릭체로 변한다.
 
 
 Strong Emphasis
@@ -2405,11 +2391,11 @@ Doctree element: strong.
 
 Start-string = end-string = "**".
 
-Text enclosed by double-asterisks is emphasized strongly::
+별표 두 개로 둘러싸인 텍스트는 강하게 강조된다::
 
-    This is **strong text**.
+    이것은 **strong text** 이다.
 
-Strongly emphasized text is typically displayed in boldface.
+강하게 강조된 텍스트는 일반적으로 굵게 변한다.
 
 
 Interpreted Text
@@ -2420,16 +2406,15 @@ processing.
 
 Start-string = end-string = "`".
 
-Interpreted text is text that is meant to be related, indexed, linked,
-summarized, or otherwise processed, but the text itself is typically
-left alone.  Interpreted text is enclosed by single backquote
-characters::
+Interpreted text는 요약, 링크, 인덱싱 또는 다른 처리를 위한 텍스트이지만
+일반적으로 그대로 남겨진 텍스트를 의미한다. Interpreted text는 백 쿼트
+하나로 둘러싸여져있다::
 
-    This is `interpreted text`.
+    이것은 `interpreted text` 이다.
 
-The "role" of the interpreted text determines how the text is
-interpreted.  The role may be inferred implicitly (as above; the
-"default role" is used) or indicated explicitly, using a role marker.
+interpreted text의 역할은 텍스트가 해석될 방식을 결정하는 것이다.
+역할은 내부적으로 (위처럼 "기본 역할"로 사용되는 것처럼) 유추되거나 role marker
+를 이용해서 외부적으로 표시될 수도 있다.
 A role marker consists of a colon, the role name, and another colon.
 A role name is a single word consisting of alphanumerics plus isolated
 internal hyphens, underscores, plus signs, colons, and periods;
