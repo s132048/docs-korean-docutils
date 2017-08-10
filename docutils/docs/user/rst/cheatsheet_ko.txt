@@ -1,14 +1,14 @@
 =====================================================
  The reStructuredText_ Cheat Sheet: Syntax Reminders
 =====================================================
-:정보: 기본적인 부분은 <http://docutils.sf.net/rst.html>를 보면 된다.
+:정보: 기본적인 부분은 <http://docutils.sf.net/rst.html>를 참고
 :작가: 데이비드 굿져 <goodger@python.org>
 :날짜: $Date$
 :Revision: $Revision$
-:설명: 이것은 "docinfo block" 로써, 도서 목록 리스트이다.
+:설명: "docinfo block"이자, 참고 문헌 분야 목록임
 
 .. NOTE:: HTML로 읽고 있다면, input syntax 예제 대신에
-   `<cheatsheet.txt>`_ 를 읽어라!
+   `<cheatsheet.txt>`_ 를 보자.
 
 Section Structure
 =================
@@ -28,8 +28,8 @@ Grid table:
 | Doctest block                  | > Quoted                          |
 +--------------------------------+-----------------------------------+
 | | Line blocks는 줄 바꿈 및 들여쓰기를 유지한다. [new in 0.3.6]     |
-| |     addresses, verse, and adornment-free lists에 유용하다.       |
-|       긴 줄은 연속되는 줄로 묶을 수 있다.                          |
+| |     addresses, verse와  adornment-free lists에 유용하다.         |
+|       긴 줄은 연속되는 줄로 묶을 수도 있다.                        |
 +--------------------------------------------------------------------+
 
 Simple tables:
@@ -39,11 +39,11 @@ List Type         예 (`text source <cheatsheet.txt>`_ 에 있는 문법)
 ================  ============================================================
 Bullet list       * 은 "-", "+", 또는 "*"를 사용한다.
 Enumerated list   1. 은  "1.", "A)" 와 "(i)" 중에서 사용한다.
-                  #. 또한 자동으로 열거되어 진다.
+                  #. 자동으로 열거되어 진다.
 Definition list   Term 은 왼쪽 끝에 맞춰져 있다 : 선택적 분류
                       Definition은 들여쓰기가 되어지고, 사이에 비어있는 줄이 없다
 Field list        :field name: field body
-Option list       -o  option & description 사이에 적어도 2개의 칸이 있어야 한다.
+Option list       -o  옵션과 설명 사이에 적어도 2개의 칸이 있어야 한다.
 ================  ============================================================
 
 ================  ============================================================
@@ -76,11 +76,10 @@ footnote reference, [1]_;
 citiation reference,[CIT2002]_; 
 |substitution|; 
 _`inline internal target`.
-
 
 Directive Quick Reference
 =========================
-더 자세한 정보는 <http://docutils.sf.net/docs/ref/rst/directives.html>를 보면 된다.
+더 자세한 정보는 <http://docutils.sf.net/docs/ref/rst/directives.html>를 참고하면 된다.
 
 ================  ============================================================
 Directive Name    설명 (Docutils 버젼은 [brackets]에 있음)
@@ -88,14 +87,14 @@ Directive Name    설명 (Docutils 버젼은 [brackets]에 있음)
 attention         구체적인 경고;  "caution", "danger",
                   "error", "hint", "important", "note", "tip", "warning"
 admonition        일반적인 제목에 대한 경고: ``.. admonition:: By The Way``
-image             ``.. image:: picture.png``; 많은 옵션이 가능하다.
+image             ``.. image:: picture.png``; 다양한 옵션이 가능하다.
 figure            "image"와 같지만, 선택적인 제목과 범례를 가진다.
 topic             ``.. topic:: Title``; 작은 섹션처럼 사용된다.
-sidebar           ``.. sidebar:: Title``; 작고 유사한 문서처럼 사용된다.
+sidebar           ``.. sidebar:: Title``; 작고 문서처럼 사용된다.
 parsed-literal    parse된 inline markup이 있는 literal block
 rubric            ``.. rubric:: Informal Heading``
 epigraph          class="epigraph"인 Block quote
-highlights        class="highlights"인Block quote
+highlights        class="highlights"인 Block quote
 pull-quote        class="pull-quote"인 Block quote
 compound          복합 단락 [0.3.6]
 container         Generic block-level container element [0.3.10]

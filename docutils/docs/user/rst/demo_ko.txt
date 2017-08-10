@@ -33,7 +33,7 @@
 
 :Dedication:
 
-    For Docutils users & co-developers.
+    Docutils 유저와 공동 개발자들에게 바침.
 
 :abstract:
 
@@ -55,12 +55,12 @@ Structural Elements
 Section Title
 -------------
 
-That's it, the text just above this line.
+텍스트는 이 줄 바로 위에 위치한다.
 
 Transitions
 -----------
 
-여기에 transition에 있고:
+아래의 줄이 transition이고 :
 
 ---------
 
@@ -77,12 +77,12 @@ A paragraph.
 Inline Markup
 `````````````
 
-단락들은 텍스트를 포함하고 inline markup( *emphasis*, **strong emphasis**, ``inline literals``, standalone hyperlinks(http://www.python.org), external hyperlinks (Python_), internal cross-references (example_), external hyperlinks with embedded URIs(`Python web site <http://www.python.org>`__), footnote references(manually numbered [1]_, anonymous auto-numbered [#]_, labeled auto-numbered [#label]_, or symbolic [*]_), citation references
-([CIT2002]_), substitution references (|example|), and _`inline
-hyperlink targets` (Targets_ )도 포함 할 수 있다.
-문자 레벨의 inline markup 또한 가능하다.(*re*\ ``Structured``\ *Text*). 문제는 |problematic| text (processing errors에 의해 발생됨)에 의해 나타난다.
+단락들은 텍스트를 포함하고 inline markup(*emphasis*, **strong emphasis**, ``inline literals``, standalone hyperlinks(http://www.python.org), external hyperlinks (Python_), internal cross-references (example_), external hyperlinks with embedded URIs(`Python web site <http://www.python.org>`__), footnote references(manually numbered [1]_, anonymous auto-numbered [#]_, labeled auto-numbered [#label]_, or symbolic [*]_), citation references
+([CIT2002]_), substitution references (|example|), 그리고 _`inline
+hyperlink targets` (Targets_ ) 또한 포함할 수 있다.
+문자 레벨의 inline markup 또한 가능하다.(*re*\ ``Structured``\ *Text*). 문제가 발생할 경우 |problematic| text (processing errors에 의해 발생됨)에 의해 나타난다.
 
-The default role for interpreted text은 `Title Reference`이다. 여기에 명시적인 interpreted text roles이 있다. : a PEP reference (:PEP:`287`); an
+The default role for interpreted text은 `Title Reference`이다. 여기에는 명시적인 interpreted text roles이 있다. : a PEP reference (:PEP:`287`); an
 RFC reference (:RFC:`2822`); a :sub:`subscript`; a :sup:`superscript`;
 :emphasis:`standard` :strong:`inline`
 :literal:`markup`.
@@ -96,7 +96,7 @@ to see how the text is wrapped.  -- ---- --------  Now note    the
 spacing    between the    words of    this sentence    (words
 should    be grouped    in pairs).``
 
-``--pep-references`` 옵션이 제공 된다면, PEP 258와 연결되는 링크가 여기에 있어야 한다.
+``--pep-references`` 옵션이 제공 된다면, PEP 258과 연결되는 링크가 여기에 있어야 한다.
 
 Bullet Lists
 ------------
@@ -162,13 +162,13 @@ Definition Lists
 Field Lists
 -----------
 
-:what: Field list는 field name과field body를 데이터 베이스의 레코드처럼 매       핑하고, 종종 확장한 문법의 일부분이 된다. 또한 Field list는 RFC 282       2 fields의 변형이다.
+:what: Field list는 field name과field body를 데이터 베이스의 레코드처럼 매핑하고, 종종 확장한 문법의 일부분이 된다. 또한 Field list는 RFC 282       2 fields의 변형이다.
 
 :how arg1 arg2:
 
     field marker는 colon, field name, colon 이다.
 
-    field body는 field marker와 관련 있는 들여쓰기된 body elements를          하나 또는 그 이상 포함할 수도 있다.
+    field body는 field marker와 관련이 있는 들여쓰기된 body elements를          하나 이상 포함할 수도 있다.
 
 Option Lists
 ------------
@@ -182,7 +182,7 @@ Option Lists
 --very-long-option
               설명은 다음 줄에서 시작될 수 있다.
   
-              설명은 어디서 시작하던지 상관없이 다양한 body elements를 포               함할 수 있다.
+              설명은 어디서 시작하던지 상관없이 다양한 body elements를 포함할 수 있다.
 
 -x, -y, -z    여러 옵션들은 "option group"이다.
 -v, --verbose    흔히 볼 수 있는 짧고 긴 옵션
@@ -190,13 +190,13 @@ Option Lists
               arguments를 가진 여러 옵션.
 /V            DOS/VMS 스타일의 옵션
 
-옵션과 설명 사이에는 최소 2개의 공간이 있어야한다.
+옵션과 설명 사이에는 최소 2개의 공백이 있어야한다.
 
 
 Literal Blocks
 --------------
 
-Literal blocks은 앞의 단락의 끝에서double-colon ("::")으로 나타내지고 들여쓰기 되어진다.::
+Literal blocks은 앞단락 끝에서 double-colon("::")으로 나타내진 후에, 들여쓰기 되어진다.::
 
     if literal_block:
         text = 'is left as-is'
@@ -216,8 +216,8 @@ Line Blocks
 |     각각의 새로운 줄은 vertical bar ("|")로 시작한다.
 |     줄 바꿈과 초기 들여쓰기는 유지된다.
 | 많은 줄들의 부분으로 연속되는 줄들을 감싼다.;
-  연속되는 줄들은 vertical bar 대신에 공간(space)을 사용한다.
-|     연속되는 줄의 왼쪽 가장자리는 위의 텍스트들의 왼쪽 가장자리처럼 정렬될 필요는 없다.
+  연속되는 줄들은 vertical bar 대신에 공백을 사용한다.
+|     연속되는 줄의 왼쪽 가장자리는 위의 텍스트들의 왼쪽 끝처럼 정렬될 필요는 없다.
 
 | 이것은 두번째 line block이다.
 |
@@ -299,9 +299,9 @@ Footnotes
 
    여기는 footnote의 두번째 단락이다.
 
-.. [#label] Footnotes는 수동적([1]_ 에서 한 것처럼)으로 넘버링 되어지거나   "#"-prefixed label을 사용해 자동적으로 넘버링 할 수 있다. 이 footnote는 label을 가지기 때문에 다양한 곳에서 ( a footnote reference ([#label]_) 와 a hyperlink reference(label_)) 참조되어질 수 있다.
+.. [#label] Footnotes는 수동적([1]_ 에서 한 것처럼)으로 넘버링 되어지거나   "#"-prefixed label을 사용해 자동적으로 넘버링 할 수 있다. 이 footnote는 label을 가지기 때문에 다양한 위치에서 (footnote reference ([#label]_) 와 hyperlink reference(label_)) 참조되어질 수 있다.
 
-.. [#] This footnote는"#"만을 사용해서 자동적이면서 특색없이 넘버링을 한다. 
+.. [#] This footnote는"#"만을 사용해서 자동적이지만 특징 없이 넘버링을 한다. 
 
 .. [*] Footnote는 "*" label로 구체화된 심볼을 사용할 수도 있다. 여기에 다음 footnote에 대한 참조: [*]_ 가 있다.
 
@@ -312,27 +312,27 @@ Footnotes
 Citations
 ---------
 
-.. [CIT2002] Citation은 텍스트로 레이블된 footnote이다. Citiation은 footnote와는 별개로, 다르게 렌더링 되어 질수도 있다.
+.. [CIT2002] Citation은 텍스트로 레이블된 footnote이다. Citation은 footnote와는 별개로 렌더링 되어 질수도 있다.
 
-위에 대한 참조 [CIT2002]_, 와 [nonexistent]_ citation.
+위에 대한 참조 [CIT2002]_ 와 [nonexistent]_ citation.
 
 Targets
 -------
 
 .. _example:
 
-이 단락은 the explicit "example" target에 의해 가리켜진다. 참조는 `Inline Markup`_ 아래에서 발견되어질 수 있다, `Inline hyperlink targets`_  역시 가능하다.
+이 단락은 the explicit "example" target에 의해 가리켜진다. reference는 위의 `Inline Markup`_ 아래에서 발견되어질 수 있다, `Inline hyperlink targets`_  역시 가능하다.
 
 
 
 Section headers는 implicit target이고, 이름에 의해 참조되어진다. 
-`Body Elements`_ 의 subsectiond인  Targets_ 를 봐라.
+`Body Elements`_ 의 subsection인 Targets_ 를 봐라.
 
 Explicit external targets는 "Python_" 과 같은 references에 삽입되어진다.
 
 .. _Python: http://www.python.org/
 
-Targets 간접적이고 익명적일 수도 있다. 그러므로 `this phrase`__ 는 또한 Targets_ section을 참조할 수도 있다.
+Targets 간접적이고 익명적일 수도 있다. 그러므로 `이 구절`__ 은 또한 Targets_ section을 참조할 수도 있다.
 
 __ Targets_
 
@@ -341,19 +341,19 @@ __ Targets_
 Duplicate Target Names
 ``````````````````````
 
-Section headers 또는 other implicit targets에 있는 Duplicate name은 "info" (level-1) 시스템 메시지를 발생 시킬 것이다. Explicit target에 있는 Duplicate names은 "warning" (level-2) 시스템 메시지를 발생 시킬 것이다.
+Section headers 또는 다른 implicit targets에 있는 Duplicate name은 "info" (level-1) 시스템 메시지를 발생 시킬 것이다. Explicit target에 있는 Duplicate names은 "warning" (level-2) 시스템 메시지를 발생 시킬 것이다.
 
 Duplicate Target Names
 ``````````````````````
-
-두 개의 "Duplicate Target Names" section headers가 있기 때문에, 이름에 의해 유일하게 어떤 것을 참조할 수는 없다.  이렇게 하면 (이처럼 `Duplicate Target Names`_ ), 에러가 발생한다.
+ 
+두 개의 "Duplicate Target Names" section header가 있기 때문에, 이름에 의해서는 유일하게 어떤 것을 참조할 수 없다. 참조를 하게 되면 이런 ( `Duplicate Target Names`_ ) 에러가 발생한다.
 
 Directives
 ----------
 
 .. contents:: :local:
 
-이는 많은 reStructuredText Directives들의 샘플일 뿐이다. 더 많은 부분을 알고 싶다면
+이는 많은 reStructuredText Directives들의 일부일 뿐이다. 더 많은 부분을 알고 싶다면
 http://docutils.sourceforge.net/docs/ref/rst/directives.html 를 참고하면 된다.
 
 Document Parts
@@ -424,15 +424,15 @@ Topics, Sidebars, and Rubrics
 .. sidebar:: Sidebar Title
    :subtitle: Optional Subtitle
 
-   여기가 사이드바이다. 사이드바는 본문의 흐름 밖에 있는 텍스트를 위해서 사용한다. 
+   이것이 사이드 바이다. 사이드 바는 본문의 흐름 밖에 있는 텍스트를 위해서 사용한다. 
 
-   .. rubric:: 이것은 sidebar안에 있는 rubric이다.
+   .. rubric:: 이것은 사이드 바 안에 있는 rubric이다.
 
-   Sidebar는 테두리와 배경색이 있고 본문 옆에 나타난다.
+   사이드 바는 테두리와 배경색을 포함하고 있고 본문 옆에 나타난다.
 
 .. topic:: Topic Title
 
-   여기가 topic이다.
+   이것이 topic이다.
 
 .. rubric:: 이것이 rubric이다.
 
@@ -459,9 +459,9 @@ Compound Paragraph
        Transmitting data... OK
        Disconnecting... OK
       
-   그러므로 하나의 simple paragraph, 하나의 literal block 그리고 또 다른 하나의 simple paragraph로 구성되어 있다.  그럼에도 불구하고 의미론적으로는 *하나의* paragraph이다.
+   그러므로 하나의 simple paragraph, 하나의 literal block, 또 다른 하나의 simple paragraph로 구성되어 있다. 그럼에도 불구하고 의미론적으로는 *하나의* paragraph로 볼 수 있다.
 
-이러한 구성은 *compound paragraph* 라고 하고 "compound" directive와 같이 만들어진다.
+이러한 구성은 *compound paragraph* 라고 하며 "compound" directive를 이용하여 만들어진다.
 
 Substitution Definitions
 ------------------------
@@ -490,6 +490,6 @@ Processing 을 하면서 발생한 에러는 시스템 메시지를 발생시킨
 
 |*** Expect 6 errors (including this one). ***|
 
-다음과 같은 6개의 메시지가 있어야하며 자동으로 만들어진 section인 "Docutils System Messages"가 있어야한다.
+다음과 같은 6개의 메시지가 있어야 하며, 자동으로 만들어진 section인 "Docutils System Messages"가 있어야한다.
 
 .. section should be added by Docutils automatically
