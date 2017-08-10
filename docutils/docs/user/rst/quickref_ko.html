@@ -1,0 +1,1219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+  <head>
+    <title>Quick reStructuredText</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <style type="text/css"><!--
+      a.backref { text-decoration: none ; color: black }
+      div.line-block { display: block }
+      div.line-block div.line-block { margin-left: 1.5em }
+    --></style>
+
+  </head>
+
+  <body>
+    <h1>Quick <i>re</i><font size="+4"><tt>Structured</tt></font><i>Text</i></h1>
+
+    <!-- Caveat: if you're reading the HTML for the examples, -->
+    <!-- beware that it was hand-generated, not by Docutils/ReST.  -->
+
+    <p align="right"><em><a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html"
+    >http://docutils.sourceforge.net/docs/user/rst/quickref.html</a></em>
+    <br><em>reStructuredText에 대한 cheat-sheet</em>
+    <br><em>Updated $Date$</em>
+
+    <blockquote>
+      <p>저작권: 이 문서는 퍼블릭 도메인이다.
+    </blockquote>
+
+
+    <p>마크업에 대해 더 자세한 사항은 
+      <a href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>
+      페이지에서 찾을 수 있다. 이 문서는 단지 내용을 상기시키기 위한 목적으로 만들어졌다.
+
+    <p>"(<a href="#details">상세 내용</a>)"으로 표시되는 링크는 전체 <a
+      href="../../ref/rst/restructuredtext.html">reStructuredText
+      specification</a>문서의 HTML 버전을 가리킨다.  이러한 링크들은 상대 링크이다. 링크의 연결이 끊어졌다면, <a
+      href="http://docutils.sourceforge.net/docs/user/rst/quickref.html"
+      >master "Quick reStructuredText"</a> 문서를 이용하면 된다.
+
+    <h2><a name="contents">목차</a></h2>
+
+    <ul>
+    <li><a href="#inline-markup">Inline Markup</a></li>
+    <li><a href="#escaping">Escaping with Backslashes</a></li>
+    <li><a href="#section-structure">Section Structure</a></li>
+    <li><a href="#paragraphs">Paragraphs</a></li>
+    <li><a href="#bullet-lists">Bullet Lists</a></li>
+    <li><a href="#enumerated-lists">Enumerated Lists</a></li>
+    <li><a href="#definition-lists">Definition Lists</a></li>
+    <li><a href="#field-lists">Field Lists</a></li>
+    <li><a href="#option-lists">Option Lists</a></li>
+    <li><a href="#literal-blocks">Literal Blocks</a></li>
+    <li><a href="#line-blocks">Line Blocks</a></li>
+    <li><a href="#block-quotes">Block Quotes</a></li>
+    <li><a href="#doctest-blocks">Doctest Blocks</a></li>
+    <li><a href="#tables">Tables</a></li>
+    <li><a href="#transitions">Transitions</a></li>
+    <li><a href="#explicit-markup">Explicit Markup</a>
+    <ul>
+    <li><a href="#footnotes">Footnotes</a></li>
+    <li><a href="#citations">Citations</a></li>
+    <li><a href="#hyperlink-targets">Hyperlink Targets</a>
+    <ul>
+    <li><a href="#external-hyperlink-targets">External Hyperlink Targets</a></li>
+    <li><a href="#internal-hyperlink-targets">Internal Hyperlink Targets</a></li>
+    <li><a href="#indirect-hyperlink-targets">Indirect Hyperlink Targets</a></li>
+    <li><a href="#implicit-hyperlink-targets">Implicit Hyperlink Targets</a></li>
+    </ul></li>
+    <li><a href="#directives">Directives</a></li>
+    <li><a href="#substitution-references-and-definitions">Substitution References and Definitions</a></li>
+    <li><a href="#comments">Comments</a></li>
+    </ul></li>
+    <li><a href="#getting-help">Getting Help</a></li>
+    </ul>
+
+    <h2><a href="#contents" name="inline-markup" class="backref"
+        >Inline Markup</a></h2>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#inline-markup">details</a>)
+
+    <p>Inline markup 텍스트 내의 단어(word)와 구(phrases)가 문자 스타일(이탤릭체와 볼드체)과 하이퍼링크 같은 기능을 가질 수 있게 해준다. 
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th>Plain text
+      <th>Typical result
+      <th>Notes
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td nowrap><samp>*emphasis*</samp>
+      <td><em>emphasis</em>
+      <td>이탤릭체로 표시된다.
+
+    <tr valign="top">
+      <td nowrap><samp>**strong&nbsp;emphasis**</samp>
+      <td><strong>strong emphasis</strong>
+      <td>볼드체로 표시된다.
+
+    <tr valign="top">
+      <td nowrap><samp>`interpreted&nbsp;text`</samp>
+      <td>(오른쪽의 노트 참조)
+      <td>Interpreted text의 렌더링과 <em>의미</em>는 도메인 또는 애플리케이션에 종속되고,  
+      인덱스 항목이나 프로그램 식별자 같은 명시적으로 설명된 마크업에 사용할 수 있다.
+
+      
+    <tr valign="top">
+      <td nowrap><samp>``inline&nbsp;literal``</samp>
+      <td><code>inline&nbsp;literal</code>
+      <td>일반적으로 단일 공백의 텍스트로 렌더링된다. 공백은 유지되어야 하지만, 줄바꿈은 유지되지 않을 것이다.
+
+    <tr valign="top">
+      <td nowrap><samp>reference_</samp>
+      <td><a href="#hyperlink-targets">reference</a>
+      <td>하나의 단어를 이용한 하이퍼링크. <a
+      href="#hyperlink-targets">Hyperlink Targets</a> 참조.
+
+    <tr valign="top">
+      <td nowrap><samp>`phrase reference`_</samp>
+      <td><a href="#hyperlink-targets">phrase reference</a>
+      <td> 공백 또는 구두점을 이용한 하이퍼링크는 따옴표를 묶어야한다. <a
+      href="#hyperlink-targets">Hyperlink Targets</a> 참조.
+
+    <tr valign="top">
+      <td nowrap><samp>anonymous__</samp>
+      <td><a href="#hyperlink-targets">anonymous</a>
+      <td>두 개의 밑줄을 이용해, 단순하거나 구로 이루어진 reference는 anonymous일 수도 있다. (reference 텍스트는 대상에서 반복되지 않는다.). <a
+      href="#hyperlink-targets">Hyperlink Targets</a> 참조.
+
+    <tr valign="top">
+      <td nowrap><samp>_`inline internal target`</samp>
+      <td><a name="inline-internal-target">inline internal target</a>
+      <td> 텍스트 내의 상호 참조 대상.
+      <a href="#hyperlink-targets">Hyperlink Targets</a> 참조.
+
+    <tr valign="top">
+      <td nowrap><samp>|substitution reference|</samp>
+      <td>(오른쪽의 노트 참조)
+      <td> <a
+      href="#substitution-references-and-definitions">substitution
+      definition</a> 으로부터 바뀐 결과. 이는 텍스트, 이미지, 하이퍼링크 또는 다른 대상들의 결합일 수도 있다.
+
+    <tr valign="top">
+      <td nowrap><samp>footnote reference [1]_</samp>
+      <td>footnote reference <sup><a href="#footnotes">1</a></sup>
+      <td><a href="#footnotes">Footnotes</a> 참조.
+
+    <tr valign="top">
+      <td nowrap><samp>citation reference [CIT2002]_</samp>
+      <td>citation reference <a href="#citations">[CIT2002]</a>
+      <td><a href="#citations">Citations</a> 참조.
+
+    <tr valign="top">
+      <td nowrap><samp>http://docutils.sf.net/</samp>
+      <td><a href="http://docutils.sf.net/">http://docutils.sf.net/</a>
+      <td>독립 실행형 하이퍼링크.
+
+    </table>
+
+    <p>Asterisk(*), backquote(`), vertical bar(|) 와 underscore(_) 는 inline
+    delimiter 문자이다. Asterisk, backquote, and vertical bar 는
+    따옴표처럼 사용된다; 짝을 이룬 문자들은 marked-up 단어나 구를 둘러싸고,
+    그 밖에는 공백이나 다른 따옴표(quoting)가 필요하다. 그리고 짝을 이룬 문자들로 둘러 쌓여진 단어나 구 안에서 공백이 있으면 안된다. inline 구분 문자를 문자 그대로 사용하려는 경우, <a href="#escaping">escape
+    (\)</a> or quote(``)를 사용한다. 
+
+    <p>상세하게, the reStructuredText 설명서에는 inline markup에서 다음의 규칙들이 start-strings과 end-strings (inline markup delimiters)에 적용된다고 나와있다. :
+
+    <ol>
+      <li>Start-string은 텍스트 블록을 시작하거나 공백이나, &nbsp;
+    <samp>' " ( [ {</samp> or&nbsp;<samp>&lt;</samp> 보다 앞에 있어야 한다.
+      <li>Start-string 바로 뒤에 공백이 없어야 한다.
+      <li>End-string 바로 뒤에 공백이 없어야 한다.
+      <li>End-string은 텍스트 블록(문서 끝 또는 빈 줄의 끝)을 끝내거나 공백이나, &nbsp;<samp>' " . , : ; ! ? - ) ] } / \</samp> 
+    or&nbsp;<samp>&gt;</samp> 보다 앞에 있어야 한다. 
+      <li>Start-string이 &nbsp;
+    <samp>' " ( [ {</samp> or&nbsp;<samp>&lt;</samp> 중 하나보다 바로 앞에 온다면, 대응하는 문자&nbsp;<samp>' " ) ] }</samp> or&nbsp;<samp>&gt;</samp> 보다 뒤에 올 수 없다.
+      <li>End-String은 Start-string으로부터 적어도 하나의 문자에 의해 구분되어야 한다.
+      <li> Start-string 또는 end-string보다 앞에 있는 <a href="#escaping">unescaped backslash</a> 는 inline literal의 end-string을 제외하고는 markup을 인지할 수 없다. 
+    </ol>
+
+    <p> inline markup이 중첩되지 않을 수도 있다는 점을 기억한다.
+    (inline literal이 다른 inline markup delimiter 문자를 포함할 수 있다는 점을 제외하고)
+    <h2><a href="#contents" name="escaping" class="backref"
+        >Escaping with Backslashes</a></h2>
+
+    <p>(<a
+    href="../../ref/rst/restructuredtext.html#escaping-mechanism">details</a>)
+
+    <p>reStructuredText는 markup 문자에 주어진 특별한 의미를 오버라이드 하고 literal 문자를 그대로 쓰기 위해 backslashes ("\")를 사용한다. literal backslash를 쓰기 위해, escaped backslash를 사용하면 된다.
+    ("\\"). 예:
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Raw reStructuredText
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top"><td>
+        <samp>*escape*&nbsp;``with``&nbsp;"\"</samp>
+      <td><em>escape</em> <samp>with</samp> ""
+    <tr valign="top"><td>
+        <samp>\*escape*&nbsp;\``with``&nbsp;"\\"</samp>
+      <td>*escape* ``with`` "\"
+    </table>
+
+    <p> 파이썬 문자열에서는 backslash 문자들을 실제로 보이기 위해서 escape를 하는 것이 필요할 것이고, 가장 간단한 방법은 raw string을 사용하는 것이다.
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Python string
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top"><td>
+        <samp>r"""\*escape*&nbsp;\`with`&nbsp;"\\""""</samp>
+      <td>*escape* `with` "\"
+    <tr valign="top"><td>
+        <samp>&nbsp;"""\\*escape*&nbsp;\\`with`&nbsp;"\\\\""""</samp>
+      <td>*escape* `with` "\"
+    <tr valign="top"><td>
+        <samp>&nbsp;"""\*escape*&nbsp;\`with`&nbsp;"\\""""</samp>
+      <td><em>escape</em> with ""
+    </table>
+
+    <h2><a href="#contents" name="section-structure" class="backref"
+        >Section Structure</a></h2>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#sections">details</a>)
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td>
+<samp>=====</samp>
+<br><samp>Title</samp>
+<br><samp>=====</samp>
+<br><samp>Subtitle</samp>
+<br><samp>--------</samp>
+<br><samp>제목은 알파벳과 숫자가 아닌 7bit 아스키 문자를</samp>
+<br><samp>이용해서 밑줄을 긋거나 밑줄과 윗줄을 그어 표</samp>
+<br><samp>시할 수 있다. 추천되는 문자는 "``=&nbsp;-&nbsp;`&nbsp;:&nbsp;'&nbsp;"&nbsp;~&nbsp;^&nbsp;_&nbsp;*&nbsp;+&nbsp;#&nbsp;&lt;&nbsp;&gt;``" 등이 있다.</samp>
+<br><samp>밑줄과 윗줄은 적어도 제목 텍스트만큼 길어야 한다.</samp>
+<br><samp></samp>
+<br><samp>단독 top-level의 (sub)section은 문서의 (sub)title이 된다.</samp>
+
+
+      <td>
+        <font size="+2"><strong>Title</strong></font>
+        <p><font size="+1"><strong>Subtitle</strong></font>
+        <p> 제목은 알파벳과 숫자가 아닌 7bit 아스키 문자를 이용해서 밑줄이 긋거나 밑줄과 윗줄이 그어 표시할 수 있다. 추천되는 문자는 "<samp>= - ` : ' " ~ ^ _ * + # &lt; &gt;</samp>" 등이 있다.
+          밑줄과 윗줄은 적어도 제목 텍스트만큼 길어야한다.
+        <p> 단독 top-level의 (sub)section은 문서의 (sub)title이 된다.
+    </table>
+
+    <h2><a href="#contents" name="paragraphs" class="backref"
+        >Paragraphs</a></h2>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#paragraphs">상세 내용</a>)
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td>
+<p><samp>이것이 단락이다.</samp>
+
+<p><samp>단락은 왼쪽에서부터 시작되고, 일반적으로 빈</samp>
+<br><samp>줄에 의해 구분되어진다.</samp>
+
+
+      <td>
+        <p>이것이 단락이다.
+
+        <p>단락은 왼쪽에서부터 시작되고, 일반적으로 빈 줄에 의해 구분되어진다.
+
+    </table>
+
+    <h2><a href="#contents" name="bullet-lists" class="backref"
+        >Bullet Lists</a></h2>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#bullet-lists">상세 내용</a>)
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td>
+<samp>Bullet&nbsp;lists:</samp>
+
+<p><samp>-&nbsp;item&nbsp;1</samp>
+<br><samp>-&nbsp;item&nbsp;2</samp>
+<br><samp>-&nbsp;Bullets은 "-",&nbsp;"*"&nbsp;or&nbsp;"+" 이다 이어지는 텍</samp>
+<br><samp>스트는 bullet과 공백 뒤에 사용해야한다.</samp>
+
+<p><samp>빈 줄은 첫 번째 item전에, 마지막 item 후에 필요</samp>
+<br><samp>하지만, item 사이에서는 선택 사항이다.</samp>
+
+      <td>Bullet lists:
+        <ul>
+          <li>item 1
+          <li>item 2
+          <li>Bullets은 "-", "*" or "+" 이다.
+        이어지는 텍스트는 bullet과 공백 뒤에 사용해야한다.
+        </ul>
+        <p>빈 줄은 첫 번째 item 전에, 마지막 item 후에 필요하지만, item 사이에서는 선택 사항이다.
+    </table>
+
+    <h2><a href="#contents" name="enumerated-lists" class="backref"
+        >Enumerated Lists</a></h2>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#enumerated-lists">details</a>)
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td>
+<samp>Enumerated&nbsp;lists:</samp>
+
+<p><samp>3. 이것이 첫번째 item이다.</samp>
+<br><samp>4. 이것이 두번째 item이다.</samp>
+<br><samp>5. Enumerators 아라비아 숫자, 문자, 로마 숫자이다.</samp>
+<br><samp>6. ist items 순차적으로 넘버링이 되어야 하지만,
+            &nbsp;&nbsp;&nbsp;1에서 시작할 필요는 없다.</samp>
+<br><samp>#. 이 item은 자동으로 나열되어졌다.</samp>
+      <td>Enumerated lists:
+        <ol type="1">
+          <li value="3">이것이 첫번째 item이다.
+          <li>이것이 두번째 item이다.
+          <li>Enumerators 아라비아 숫자, 문자, 로마 숫자이다.
+          <li>List items 순차적으로 넘버링이 되어야 하지만,
+        1에서 시작할 필요는 없다. 
+          <li>이 item은 자동으로 나열되어졌다.
+        </ol>
+    </table>
+
+    <h2><a href="#contents" name="definition-lists" class="backref"
+        >Definition Lists</a></h2>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#definition-lists">details</a>)
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td>
+<samp>Definition&nbsp;lists:</samp>
+<br>
+<br><samp>what</samp>
+<br><samp>&nbsp;&nbsp;&nbsp;&nbsp;Definition lists는 용어의 정의와 관련이 있다.</samp>
+<br>
+<br><samp>how</samp>
+<br><samp>&nbsp;&nbsp;&nbsp;&nbsp;용어는 한 줄짜리 문구이고, 정의는 하나</samp>
+<br><samp>&nbsp;&nbsp;&nbsp;&nbsp;또는 그 이상의 단락 도는 body elements이</samp>
+<br><samp>&nbsp;&nbsp;&nbsp;&nbsp;다. 이는 용어에 의해 들여쓰기 되어져 있</samp>
+<br><samp>&nbsp;&nbsp;&nbsp;&nbsp;다. 은 용어와 정의 사이에 사용될 수</samp>
+<br><samp>&nbsp;&nbsp;&nbsp;&nbsp;없다.</samp>
+
+      <td>Definition lists:
+        <dl>
+          <dt><strong>what</strong>
+          <dd>Definition lists는 용어의 정의와 관련이 있다.
+
+          <dt><strong>how</strong>
+          <dd>용어는 한 줄짜리 문구이고, 정의는 하나 또는 그 이상의 단락 또는 body elements이다. 이는 용어에 의해 들여쓰기 되어져 있다. 빈 줄은 용어와 정의 사이에 사용될 수 없다.
+        </dl>
+    </table>
+
+    <h2><a href="#contents" name="field-lists" class="backref"
+        >Field Lists</a></h2>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#field-lists">상세 내용</a>)
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td>
+<samp>:저자:</samp>
+<br><samp>&nbsp;&nbsp;&nbsp;&nbsp;Tony&nbsp;J.&nbsp;(Tibs)&nbsp;Ibbs,</samp>
+<br><samp>&nbsp;&nbsp;&nbsp;&nbsp;David&nbsp;Goodger</samp>
+<br><samp>&nbsp;&nbsp;&nbsp;&nbsp;(and&nbsp;sundry&nbsp;other&nbsp;good-natured&nbsp;folks)</samp>
+
+<p><samp>:버젼:&nbsp;1.0&nbsp;of&nbsp;2001/08/08</samp>
+<br><samp>:헌정:&nbsp;To&nbsp;my&nbsp;father.</samp>
+      <td>
+        <table>
+          <tr valign="top">
+        <td><strong>저자:</strong>
+        <td>Tony J. (Tibs) Ibbs,
+          David Goodger
+          <tr><td><td>(and sundry other good-natured folks)
+          <tr><td><strong>버젼:</strong><td>1.0 of 2001/08/08
+          <tr><td><strong>헌정:</strong><td>To my father.
+        </table>
+    </table>
+
+    <p>Field lists는 
+    <a href="#directives">directives</a>에 대한 옵션이나 추가 처리를 위한 데이터베이스의 레코드 같은 확장된 구문의 일부로 사용되어 진다.  Field lists 또한
+    문서에서 일반적인 2 열 테이블을 구성하는 데에도 사용된다.
+
+    <h2><a href="#contents" name="option-lists" class="backref"
+        >Option Lists</a></h2>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#option-lists">상세 내용</a>)
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+      <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td>
+        <p><samp>
+-a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command-line&nbsp;옵션&nbsp;"a"
+<br>-b&nbsp;file&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;옵션은 arguments와 긴 설명을 가
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;질 수 있다.
+<br>--long&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;옵션 또한 길어질 수 있다.
+<br>--input=file&nbsp;&nbsp;긴 옵션은 또한 arguments를 가질
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;수 있다.
+<br>/V&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DOS/VMS 스타일 옵션
+</samp>
+
+      <td>
+        <table border="0" width="100%">
+          <tbody valign="top">
+            <tr>
+              <td width="30%"><samp>-a</samp>
+              <td>command-line 옵션 "a"
+            <tr>
+              <td><samp>-b <i>file</i></samp>
+              <td>옵션은 arguments와 긴 설명을 가질 수 있다.
+            <tr>
+              <td><samp>--long</samp>
+              <td>옵션 또한 길어질 수 있다.
+            <tr>
+              <td><samp>--input=<i>file</i></samp>
+              <td>긴 옵션은 또한 arguments를 가질 수 있다.
+            <tr>
+              <td><samp>/V</samp>
+              <td>DOS/VMS 스타일 옵션
+        </table>
+    </table>
+
+    <p> 옵션과 설명사이에 최소 두 개의 공백이 있어야한다.
+
+    <h2><a href="#contents" name="literal-blocks" class="backref"
+        >Literal Blocks</a></h2>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#literal-blocks">상세 내용</a>)
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td>
+<br>
+<samp>오직 두 개의 콜론을 포함하는 단락은 다음에 오는 들</samp>
+<br><samp>여쓰기된 텍스트나 인용된 텍스트가 literal block 이라 는 것을 나타낸다.</samp>
+<br>
+<br><samp>::</samp>
+<br>
+<br><samp>&nbsp;&nbsp;공백문자, 새로운 줄, 빈 줄, 모든 종류의 마크업</samp>
+<br><samp>&nbsp;&nbsp;(*this* or/this)은 literal block에 의해 </samp>
+<br><samp>&nbsp;&nbsp;유지된다.</samp>
+<br>
+<br><samp>&nbsp;&nbsp;'::'만 포함하고 있는 단락은 결과에서는</samp>
+<br><samp>&nbsp;&nbsp;생략되어진다.</samp>
+<br>
+<br><samp>``::``은 단락의 끝에 붙일 수도 있다.</samp>
+<br><samp>``::``은 공백문자가 앞에 오면 생략된다. </samp>
+<br><samp>``::``은 텍스트가 앞에 오면 하나의 콜론으로 바뀐다, 이렇게::</samp>
+
+<br>
+<br><samp>&nbsp;&nbsp;이 양식을 사용하는 것은 매우 편리하다.</samp>
+<br>
+<br><samp>Literal&nbsp;block은 텍스트가 앞선 단락의 들여쓰기를 리턴할 때 끝이 난다. 이것은 아래의 예시처럼 하는 것이 가능하다는 것을 의미한다::</samp>
+<br>
+<br><samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We&nbsp;start&nbsp;here</samp>
+<br><samp>&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;continue&nbsp;here</samp>
+<br><samp>&nbsp;&nbsp;and&nbsp;end&nbsp;here.</samp>
+<br>
+<br><samp>줄 단위의 인용은 들여쓰기 되지 않은 literal block에서도 사용될 수 있다::</samp>
+<br>
+<br><samp>&gt;&nbsp;Useful&nbsp;for&nbsp;quotes&nbsp;from&nbsp;email&nbsp;and</samp>
+<br><samp>&gt;&nbsp;for&nbsp;Haskell&nbsp;literate&nbsp;programming.</samp>
+
+      <td>
+        <p>오직 두 개의 콜론을 포함하는 단락은 다음에 오는 들여쓰기된 텍스트나 인용된 텍스트가 literal block 이라는 것을 나타낸다.
+
+        <pre>
+  공백문자, 새로운 줄, 빈 줄, 모든 종류의 마크업(*this* or
+  \this)은 literal block에 의해 유지된다. 
+
+  '::'만 포함하고 있는 단락은 결과에서는 생략되어진다.
+  </pre>
+
+        <p><samp>::</samp>은 단락의 끝에 붙일 수도 있다.
+        <samp>::</samp>은 공백문자가 앞에 오면 생략된다. 
+<samp>::</samp> 은 텍스트가 앞에 오면 하나의 콜론으로 바뀐다, 이렇게:
+
+        <pre>
+  이 양식을 사용하는 것은 매우 편리하다.</pre>
+
+        <p>Literal block은 텍스트가 앞선 단락의 들여쓰기를 리턴할 때 끝이 난다.
+이것은 아래의 예시처 하는 것이 가능하다는 것을 의미한다:
+
+        <pre>
+      We start here
+    and continue here
+  and end here.</pre>
+
+        <p>줄 단위의 인용은 들여쓰기 되지 않은 literal block에도 사용될 수 있다:
+
+        <pre>
+  &gt; Useful for quotes from email and
+  &gt; for Haskell literate programming.</pre>
+    </table>
+
+    <h2><a href="#contents" name="line-blocks" class="backref"
+        >Line Blocks</a></h2>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#line-blocks">상세 내용</a>)
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td>
+<samp>|&nbsp;Line block은 주소, 운문, 꾸밈없는 리스트에 </samp>
+<br><samp>|&nbsp;유용하다.</samp>
+<br><samp></samp>
+<br><samp>|&nbsp;각각의 줄은 vertical bar("|")로 시작한다.</samp>
+<br><samp>|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;줄 바꿈과 초기 들여쓰기는 유지된다.</samp>
+<br><samp>|&nbsp;연속되는 줄들은 긴 줄의 일부분이고,</samp>
+<br><samp>&nbsp;&nbsp;vertical bar 대신에 공백을 써서 시작한다.</samp>
+
+      <td>
+        <div class="line-block">
+          <div class="line">Line block은 주소, 운문, 꾸밈없는 리스트에 유용하다.</div>
+          <div class="line"><br /></div>
+          <div class="line">각각의 줄은 vertical bar("|")로 시작한다.</div>
+          <div class="line-block">
+            <div class="line">줄 바꿈과 초기 들여쓰기는 유지된다.</div>
+          </div>
+          <div class="line">연속되는 줄들은 긴 줄의 일부분이고, vertical bar 대신에
+            공백을 써서 시작한다.</div>
+        </div>
+    </table>
+
+    <h2><a href="#contents" name="block-quotes" class="backref"
+        >Block Quotes</a></h2>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#block-quotes">상세 내용</a>)
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+      <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td>
+<samp>Block&nbsp;quotes&nbsp;are&nbsp;just:</samp>
+
+<p><samp>&nbsp;&nbsp;&nbsp;&nbsp;들여쓰기된 단락,</samp>
+
+<p><samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;들여쓰기된 단락은 중첩될 수도 있다.</samp>
+      <td>
+        Block quotes are just:
+        <blockquote>
+          <p>들여쓰기된 단락,
+          <blockquote>
+        <p>들여쓰기된 단락은 중첩될 수도 있다.
+          </blockquote>
+        </blockquote>
+    </table>
+
+    <p> block quote와 directive contents 같은 들여쓰기 context를 구분하려면 <a href="#comments">empty comments</a>를 사용하면 된다. 
+    </p>
+
+    <h2><a href="#contents" name="doctest-blocks" class="backref"
+        >Doctest Blocks</a></h2>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#doctest-blocks">details</a>)
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+      <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td>
+        <p><samp>Doctest&nbsp;blocks&nbsp;은 대화식의 Python session이다.
+<br>Doctest block은 "``&gt;&gt;&gt;``"로 시작하고 빈 줄로 끝난다.</samp>
+
+        <p><samp>&gt;&gt;&gt;&nbsp;print&nbsp;"This&nbsp;is&nbsp;a&nbsp;doctest&nbsp;block."
+<br>This&nbsp;is&nbsp;a&nbsp;doctest&nbsp;block.</samp>
+
+      <td>
+        <p>Doctest block은 대화식의 Python session이다. Doctest block은 
+        "<samp>&gt;&gt;&gt;</samp>"로 시작하고 빈 줄로 끝난다.
+
+        <p><samp>&gt;&gt;&gt;&nbsp;print&nbsp;"This&nbsp;is&nbsp;a&nbsp;doctest&nbsp;block."
+<br>This&nbsp;is&nbsp;a&nbsp;doctest&nbsp;block.</samp>
+    </table>
+
+    <p>"<a
+    href="http://www.python.org/doc/current/lib/module-doctest.html">Doctest</a>
+    모듈은 대화식의 Python session처럼 보이는 텍스트를 찾기 위해 모듈의 docstrings을 검색한다. 그리고 나서, 모든 세션을 실행하여 정확하게 작동하는지를 확인한다. (From the doctest docs.)
+
+    <h2><a href="#contents" name="tables" class="backref"
+        >Tables</a></h2>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#tables">상세 내용</a>)
+
+    <p>reStructuredText의 table에는 두 가지의 syntax가 있다. Grid
+    table 완벽하지만 만들기가 번거롭다. Simple table은 만들기는 쉽지만 기능이 제한적이다.</p>
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td>
+<p><samp>Grid table:</samp></p>
+
+<p><samp>+------------+------------+-----------+</samp>
+<br><samp>|&nbsp;Header&nbsp;1&nbsp;&nbsp;&nbsp;|&nbsp;Header&nbsp;2&nbsp;&nbsp;&nbsp;|&nbsp;Header&nbsp;3&nbsp;&nbsp;|</samp>
+<br><samp>+============+============+===========+</samp>
+<br><samp>|&nbsp;body&nbsp;row&nbsp;1&nbsp;|&nbsp;column&nbsp;2&nbsp;&nbsp;&nbsp;|&nbsp;column&nbsp;3&nbsp;&nbsp;|</samp>
+<br><samp>+------------+------------+-----------+</samp>
+<br><samp>|&nbsp;body&nbsp;row&nbsp;2&nbsp;|&nbsp;Cells&nbsp;may&nbsp;span&nbsp;columns.|</samp>
+<br><samp>+------------+------------+-----------+</samp>
+<br><samp>|&nbsp;body&nbsp;row&nbsp;3&nbsp;|&nbsp;Cells&nbsp;may&nbsp;&nbsp;|&nbsp;-&nbsp;Cells&nbsp;&nbsp;&nbsp;|</samp>
+<br><samp>+------------+&nbsp;span&nbsp;rows.&nbsp;|&nbsp;-&nbsp;contain&nbsp;|</samp>
+<br><samp>|&nbsp;body&nbsp;row&nbsp;4&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;-&nbsp;blocks.&nbsp;|</samp>
+<br><samp>+------------+------------+-----------+</samp></p>
+      <td>
+        <p>Grid table:</p>
+        <table border="1">
+          <thead valign="bottom">
+            <tr>
+              <th>Header 1
+              <th>Header 2
+              <th>Header 3
+            </tr>
+          </thead>
+          <tbody valign="top">
+            <tr>
+              <td>body row 1
+              <td>column 2
+              <td>column 3
+            </tr>
+            <tr>
+              <td>body row 2
+              <td colspan="2">Cells may span columns.
+            </tr>
+            <tr>
+              <td>body row 3
+              <td rowspan="2">Cells may<br>span rows.
+              <td rowspan="2">
+                <ul>
+                  <li>Cells
+                  <li>contain
+                  <li>blocks.
+                </ul>
+            </tr>
+            <tr>
+              <td>body row 4
+            </tr>
+        </table>
+    <tr valign="top">
+      <td>
+<p><samp>Simple table:</samp></p>
+
+<p><samp>=====&nbsp;&nbsp;=====&nbsp;&nbsp;======</samp>
+<br><samp>&nbsp;&nbsp;&nbsp;Inputs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output</samp>
+<br><samp>------------&nbsp;&nbsp;------</samp>
+<br><samp>&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;or&nbsp;B</samp>
+<br><samp>=====&nbsp;&nbsp;=====&nbsp;&nbsp;======</samp>
+<br><samp>False&nbsp;&nbsp;False&nbsp;&nbsp;False</samp>
+<br><samp>True&nbsp;&nbsp;&nbsp;False&nbsp;&nbsp;True</samp>
+<br><samp>False&nbsp;&nbsp;True&nbsp;&nbsp;&nbsp;True</samp>
+<br><samp>True&nbsp;&nbsp;&nbsp;True&nbsp;&nbsp;&nbsp;True</samp>
+<br><samp>=====&nbsp;&nbsp;=====&nbsp;&nbsp;======</samp></p>
+
+      <td>
+        <p>Simple table:</p>
+        <table border="1">
+          <colgroup>
+            <col width="31%">
+            <col width="31%">
+            <col width="38%">
+          </colgroup>
+          <thead valign="bottom">
+            <tr>
+              <th colspan="2">Inputs
+              <th>Output
+            <tr>
+              <th>A
+              <th>B
+              <th>A or B
+          <tbody valign="top">
+            <tr>
+              <td>False
+              <td>False
+              <td>False
+            <tr>
+              <td>True
+              <td>False
+              <td>True
+            <tr>
+              <td>False
+              <td>True
+              <td>True
+            <tr>
+              <td>True
+              <td>True
+              <td>True
+        </table>
+
+    </table>
+
+    <h2><a href="#contents" name="transitions" class="backref"
+        >Transitions</a></h2>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#transitions">상세 내용</a>)
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+      <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td>
+        <p><samp>
+Transition marker는 punctuation character를 
+<br>4개 이상 반복해서 입력하면서 만든 수평의 줄이다.
+</samp>
+
+        <p><samp>------------</samp>
+
+        <p><samp>Transition으로 section이나 document를 시작하거나
+<br>끝내지 말아야한다. 또한 두 개의 transition은 바로 인접해있지 않아야한다.</samp>
+
+      <td>
+        <p>Transition marker는 punctuation character를 4개 이상 반복해서 입력하면서 만든 수평의 줄이다.</p>
+
+        <hr>
+
+        <p>Transition으로 section이나 document를 시작하거나 끝내지 말아야 한다. 
+        또한 두 개의 transition은 바로 인접해있지 않아야한다.
+    </table>
+
+    <p>Transitions 일반적으로 소설에서 보여진다.(예 : 텍스트가 분리되는 부분을 표시하거나, 제목, 시간, 관점, 강조 등의 변화를 나타냄).
+
+    <h2><a href="#contents" name="explicit-markup" class="backref"
+        >Explicit Markup</a></h2>
+
+    <p>Explicit markup block은 hyperlink, targets, comments와 같은 직접적으로 문서를 참조하지 않거나 directives같은 특별한 처리를 요구하는 footnote를 구성하는 데에 사용된다.
+    모든 Explicit markup block은 2개의 period와 공백문자로 시작해야한다.
+    <h3><a href="#contents" name="footnotes" class="backref"
+        >Footnotes</a></h3>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#footnotes">상세 내용</a>)
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+
+    <tr valign="top">
+      <td>
+        <samp>[5]_ 와 같은 것이 footnote reference이다.</samp>
+        <br><samp>footnote는 다른 위치로(예 : 페이지의 끝) 재조정 될 수도 있다.</samp>
+
+        <p><samp>..&nbsp;[5] 숫자로 된 footnote.</samp>
+          <br><samp>&nbsp;&nbsp;&nbsp;``]`` 다음에 콜론이 없다.</samp>
+
+      <td>
+        <sup><a href="#5">5</a></sup>와 같은 것이 footnote reference이다.
+        footnote는 다른 위치로(예 : 페이지의 끝) 재조정 될 수도 있다.
+
+        <p><table>
+          <tr><td colspan="2"><hr>
+          <!-- <tr><td colspan="2">Footnotes: -->
+          <tr><td><a name="5"><strong>[5]</strong></a><td> 숫자로 된 footnote.
+          <samp>]</samp> 다음에 콜론이 없다.
+          </table>
+
+    <tr valign="top">
+      <td>
+        <samp> 이렇게 사용하면 &nbsp;[#]_&nbsp;와&nbsp;[#]_ 처럼 자동 넘버링도 가능하다.</samp>
+        <p><samp>..&nbsp;[#]&nbsp;This&nbsp;is&nbsp;the&nbsp;first&nbsp;one.</samp>
+          <br><samp>..&nbsp;[#]&nbsp;This&nbsp;is&nbsp;the&nbsp;second&nbsp;one.</samp>
+
+        <p><samp>'autonumber labels'를 부여받을 수도 있다 - 예를 들면 #fourth]_&nbsp;와&nbsp;[#third]_.</samp>
+
+        <p><samp>..&nbsp;[#third]&nbsp;a.k.a.&nbsp;third_</samp>
+        <p><samp>..&nbsp;[#fourth]&nbsp;a.k.a.&nbsp;fourth_</samp>
+      <td>
+        이렇게 사용하면 <sup><a
+        href="#auto1">1</a></sup> 와 <sup><a href="#auto2">2</a></sup> 처럼 자동 넘버링도 가능하다.
+
+        <p>'autonumber labels'를 부여받을 수도 있다.  - 예를 들면,
+          <sup><a href="#fourth">4</a></sup> 와 <sup><a
+          href="#third">3</a></sup>.
+
+        <p><table>
+          <tr><td colspan="2"><hr>
+          <!-- <tr><td colspan="2">Footnotes: -->
+          <tr><td><a name="auto1"><strong>[1]</strong></a><td> This is the first one.
+          <tr><td><a name="auto2"><strong>[2]</strong></a><td> This is the second one.
+          <tr><td><a name="third"><strong>[3]</strong></a><td> a.k.a. <a href="#third">third</a>
+          <tr><td><a name="fourth"><strong>[4]</strong></a><td> a.k.a. <a href="#fourth">fourth</a>
+        </table>
+
+    <tr valign="top">
+      <td>
+        <samp>이렇게 사용하면 [*]_&nbsp;과&nbsp;[*]_ 처럼 자동 symbol footnote도 가능하다.</samp>
+        <p><samp>..&nbsp;[*]&nbsp;This&nbsp;is&nbsp;the&nbsp;first&nbsp;one.</samp>
+          <br><samp>..&nbsp;[*]&nbsp;This&nbsp;is&nbsp;the&nbsp;second&nbsp;one.</samp>
+
+      <td>
+        이렇게 사용하면 <sup><a href="#symbol1">*</a></sup>
+        과 <sup><a href="#symbol2">&dagger;</a></sup>처럼 자동 symbol footnote도 가능하다.
+
+        <p><table>
+          <tr><td colspan="2"><hr>
+          <!-- <tr><td colspan="2">Footnotes: -->
+          <tr><td><a name="symbol1"><strong>[*]</strong></a><td> This is the first symbol footnote
+          <tr><td><a name="symbol2"><strong>[&dagger;]</strong></a><td> This is the second one.
+        </table>
+
+    </table>
+
+    <p> 자동으로 넘버링된 footnote의 넘버링은 reference가 아닌 footnote의 순서에 의해 결정된다. autonumber labels ("<samp>[#]_</samp>")없이, 자동으로 넘버링된 footnote references들에 대해, references와 footnotes 같은 상대적 순서를 가지고 있어야 한다. auto-symbol footnotes ("<samp>[*]_</samp>")에 대해서도 유사하다.
+
+    <h3><a href="#contents" name="citations" class="backref"
+        >Citations</a></h3>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#citations">상세 내용</a>)
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+
+    <tr valign="top">
+      <td>
+        <samp>[CIT2002]_ 와 같은 것이 Citation referencedㅣ다. citation은 다른 위치로
+        (예 : 페이지의 끝) 재조정 될 수도 있다.</samp>
+        
+        <p><samp>..&nbsp;[CIT2002]&nbsp;A&nbsp;citation</samp>
+          <br><samp>&nbsp;&nbsp;&nbsp;(as&nbsp;often&nbsp;used&nbsp;in&nbsp;journals).</samp>
+
+        <p><samp>Citation label은 문자와 숫자, 밑줄, 하이픈과 마침표를 포함한다. Case는 중요하지 않다.</samp>
+          
+        <p><samp>[this]_ 와 같은 citationd을 고려해보면,</samp>
+          <br><samp>this_ 또한 참조할 수 있다.</samp>
+
+        <p><samp>..&nbsp;[this]&nbsp;here.</samp>
+
+      <td>
+         <a href="#cit2002">[CIT2002]</a>와 같은 것이 Citation reference이다.
+        citation은 다른 위치로(예 : 페이지의 끝) 재조정 될 수도 있다.
+
+        <p>Citation label은 문자와 숫자, 밑줄, 하이픈과 마침표를 포함한다. Case는 중요하지 않다.
+
+        <p><a href="#this">[this]</a>과 같은 citation을 고려해보면, <a href="#this">this</a> 또한 참조할 수 있다.
+
+        <p><table>
+          <tr><td colspan="2"><hr>
+          <!-- <tr><td colspan="2">Citations: -->
+          <tr><td><a name="cit2002"><strong>[CIT2002]</strong></a><td> A citation
+          (as often used in journals).
+          <tr><td><a name="this"><strong>[this]</strong></a><td> here.
+          </table>
+
+    </table>
+
+    <h3><a href="#contents" name="hyperlink-targets" class="backref"
+        >Hyperlink Targets</a></h3>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#hyperlink-targets">상세 내용</a>)
+
+    <h4><a href="#contents" name="external-hyperlink-targets" class="backref"
+        >External Hyperlink Targets</a></h4>
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+
+    <tr valign="top">
+      <td rowspan="2">
+        <samp>External&nbsp;hyperlinks,&nbsp;like&nbsp;Python_.</samp>
+
+        <p><samp>..&nbsp;_Python:&nbsp;http://www.python.org/</samp>
+      <td>
+        <table width="100%">
+          <tr bgcolor="#99CCFF"><td><em>Fold-in form</em>
+          <tr><td>External hyperlinks, like
+          <a href="http://www.python.org/">Python</a>.
+        </table>
+    <tr valign="top">
+      <td>
+        <table width="100%">
+          <tr bgcolor="#99CCFF"><td><em>Call-out form</em>
+          <tr><td>External hyperlinks, like
+          <a href="#labPython"><i>Python</i></a>.
+
+          <p><table>
+            <tr><td colspan="2"><hr>
+            <tr><td><a name="labPython"><i>Python:</i></a>
+              <td> <a href="http://www.python.org/">http://www.python.org/</a>
+          </table>
+        </table>
+    </table>
+
+    <p>"<em>Fold-in</em>"은 일반적으로 HTML 문서에서 사용되는 표현방법이다. (케이크에 들어가는 재료처럼 indirect hyperlink를 "folded in"으로 생각해라.) 그리고"<em>call-out</em>"는 링크가 명시적으로 표현되어질 필요가 있는 printed 문서에 더욱 적합하다. footnote가 하나의 예이다.
+      "<a href="../../ref/rst/directives.html#target-notes">target-notes</a>"
+      directive을 사용해서 call-out 형태를 강제로 사용하게 할 수도 있다.
+
+    <p>reStructuredText는 가독성의 측면에서 편리함을 위해 <b>embedded URIs</b> (<a
+      href="../../ref/rst/restructuredtext.html#embedded-uris">상세 내용</a>)을 제공한다. Hyperlink reference는 직접 angle brackets 내의 target URI를 inline으로 포함할 수 있다. 다음의 위와 같은 예이다.:
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+
+    <tr valign="top">
+      <td rowspan="2">
+        <samp>External&nbsp;hyperlinks,&nbsp;like&nbsp;`Python
+<br>&lt;http://www.python.org/&gt;`_.</samp>
+      <td>External hyperlinks, like
+          <a href="http://www.python.org/">Python</a>.
+    </table>
+
+    <h4><a href="#contents" name="internal-hyperlink-targets" class="backref"
+        >Internal Hyperlink Targets</a></h4>
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+
+    <tr valign="top">
+      <td rowspan="2"><samp>Internal&nbsp;crossreferences,&nbsp;like&nbsp;example_.</samp>
+
+        <p><samp>..&nbsp;_example:</samp>
+
+        <p><samp>이는 crossreference&nbsp;target의 예이다.</samp>
+      <td>
+        <table width="100%">
+          <tr bgcolor="#99CCFF"><td><em>Fold-in form</em>
+          <!-- Note that some browsers may not like an "a" tag that -->
+          <!-- does not have any content, so we could arbitrarily   -->
+          <!-- use the first word as content - *or* just trust to   -->
+          <!-- luck!                                                -->
+          <tr><td>Internal crossreferences, like <a href="#example-foldin">example</a>
+          <p><a name="example-foldin">이는</a> 
+            crossreference target의 예이다.
+        </table>
+    <tr valign="top">
+      <td>
+        <table width="100%">
+          <tr><td bgcolor="#99CCFF"><em>Call-out form</em>
+          <tr><td>Internal crossreferences, like <a href="#example-callout">example</a>
+
+          <p><a name="example-callout"><i>example:</i></a>
+            <br>이는 crossreference target의 예이다.
+        </table>
+
+    </table>
+
+    <h4><a href="#contents" name="indirect-hyperlink-targets" class="backref"
+        >Indirect Hyperlink Targets</a></h4>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#indirect-hyperlink-targets">상세 내용</a>)
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+
+    <tr valign="top">
+      <td>
+        <samp>Python_&nbsp;is&nbsp;`my&nbsp;favourite
+<br>programming&nbsp;language`__.</samp>
+
+        <p><samp>..&nbsp;_Python:&nbsp;http://www.python.org/</samp>
+
+        <p><samp>__&nbsp;Python_</samp>
+
+      <td>
+        <p><a href="http://www.python.org/">Python</a> is
+        <a href="http://www.python.org/">my favourite
+        programming language</a>.
+
+    </table>
+
+    <p>"<samp>__</samp>"로 시작하는 라인인 두번째 hyperlink target은  an indirect hyperlink target
+    (<i>간접적으로</i> "<samp>Python_</samp>" reference를 통해 Python 웹사이트를 가리킴)이자 <b>anonymous hyperlink target 이다. </b>. 텍스트에서, a double-underscore 접미사는 <b>anonymous hyperlink reference</b>를 표시하는데 사용된다. an anonymous
+    hyperlink target에서 reference 텍스트는 반복되지 않는데, 이는 긴 텍스트를 가진 reference나 일회용 reference에 유용하게 사용된다. 하지만 target은 reference가 싱크에서 벗어나는 것을 막기위해 가까이에서 유지되어야 한다.
+
+    <h4><a href="#contents" name="implicit-hyperlink-targets" class="backref"
+        >Implicit Hyperlink Targets</a></h4>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#implicit-hyperlink-targets">상세 내용</a>)
+
+    <p>Section titles, footnotes, and citations 자동적으로 
+    hyperlink targets (title text 또는 footnote/citation label 은 hyperlink의 이름으로 사용된다.)를 발생시킨다.
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+       <thead><tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+
+    <tr valign="top">
+      <td>
+        <samp>Titles&nbsp;are&nbsp;targets,&nbsp;too</samp>
+        <br><samp>=======================</samp>
+        <br><samp>Implict&nbsp;references,&nbsp;like&nbsp;`Titles&nbsp;are</samp>
+        <br><samp>targets,&nbsp;too`_.</samp>
+      <td>
+        <font size="+2"><strong><a name="title">Titles are targets, too</a></strong></font>
+        <p>Implict references, like <a href="#title">Titles are
+        targets, too</a>.
+    </table>
+
+    <h3><a href="#contents" name="directives" class="backref"
+        >Directives</a></h3>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#directives">상세 내용</a>)
+
+    <p>Directives는 새로운 syntax의 추가 없이 새로운 구조에 대한 support를 추가하는 방법의 범용 확장 메커니즘이다. 표준 directives의 설명에 대해 더 알아보고 싶으면, <a
+    href="../../ref/rst/directives.html" >reStructuredText
+    Directives</a>를 봐라.
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td><samp>For&nbsp;instance:</samp>
+
+        <p><samp>..&nbsp;image::&nbsp;images/ball1.gif</samp>
+
+      <td>
+        For instance:
+        <p><img src="images/ball1.gif" alt="ball1">
+    </table>
+
+    <h3><a href="#contents" name="substitution-references-and-definitions"
+        class="backref" >Substitution References and Definitions</a></h3>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#substitution-definitions">상세 내용</a>)
+
+    <p>Substitutions은 inline directives와 같고, 텍스트 내에서 그래픽과 임의의 구성을 할 수 있게 해준다.
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td><samp>
+The&nbsp;|biohazard|&nbsp;symbol&nbsp;must&nbsp;be
+used&nbsp;on&nbsp;containers&nbsp;used&nbsp;to
+dispose&nbsp;of&nbsp;medical&nbsp;waste.</samp>
+
+        <p><samp>
+..&nbsp;|biohazard|&nbsp;image::&nbsp;biohazard.png</samp>
+
+      <td>
+
+        <p>The <img src="images/biohazard.png" align="bottom" alt="biohazard"> symbol
+        must be used on containers used to dispose of medical waste.
+
+    </table>
+
+    <h3><a href="#contents" name="comments" class="backref"
+        >Comments</a></h3>
+
+    <p>(<a href="../../ref/rst/restructuredtext.html#comments">상세 내용</a>)
+
+    <p>Explicit markup으로 시작을 하는 텍스트이지만, 위의 구조에서 사용한 어떠한 syntax도 사용하지 않는다.
+
+    <p><table border="1" width="100%" bgcolor="#ffffcc" cellpadding="3">
+      <thead>
+    <tr align="left" bgcolor="#99CCFF">
+      <th width="50%">Plain text
+      <th width="50%">Typical result
+      </thead>
+      <tbody>
+    <tr valign="top">
+      <td><samp>..&nbsp;이 텍스트는 보여지지 않을 것이다.</samp>
+        <br><samp>&nbsp;&nbsp;&nbsp;(HTML comment로 렌더링이 되었다면</samp>
+        <br><samp>&nbsp;&nbsp;&nbsp; HTML에서는 있을 수도 있다.)</samp>
+
+      <td>&nbsp;
+          <!-- This text will not be shown         -->
+          <!-- (but, for instance in HTML might be -->
+          <!-- rendered as an HTML comment)        -->
+
+    <tr valign="top">
+      <td>
+        <samp>"empty&nbsp;comment"는 다음에 오는 block을 사용하지 않는다.</samp>
+        <br><samp>(Empty comment란 앞 뒤로 blank line을 가진 ".." 이다.)</samp>
+        <p><samp>..</samp>
+        <p><samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;그래서 들여쓰기를 했음에도 불구하고,</samp>
+          <br><samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이 block은 "lost" 되지 않았다.</samp>
+      <td>
+        "empty comment"는 다음에 오는 block을 사용하지 않는다.
+        (Empty comment란 앞 뒤로 blank line을 가진 ".." 이다.)
+        <blockquote>
+          그래서 들여쓰기를 했음에도 불구하고,
+          이 block은 "lost" 되지 않았다.
+        </blockquote>
+    </table>
+
+    <h2><a href="#contents" name="getting-help" class="backref"
+        >Getting Help</a></h2>
+
+    <p>Docutils나 reStructuredText에 대해서 궁금한 점이 있거나 도움이 필요한 유저는  <a
+    href="mailto:docutils-users@lists.sourceforge.net" >메시지를 보내도 된다. </a> (<a
+    href="http://lists.sourceforge.net/lists/listinfo/docutils-users"
+    >Docutils-Users mailing list</a>). 그리고 <a
+    href="http://docutils.sourceforge.net/" >Docutils project web
+    site</a> 에서 더 자세한 정보를 알아볼 수도 있다.
+
+    <p><hr>
+    <address>
+      <p>Authors:
+    <a href="http://www.tibsnjoan.co.uk/">Tibs</a>
+    (<a href="mailto:tibs@tibsnjoan.co.uk"><tt>tibs@tibsnjoan.co.uk</tt></a>)
+    and David Goodger
+    (<a href="mailto:goodger@python.org">goodger@python.org</a>)
+    </address>
+    <!-- Created: Fri Aug 03 09:11:57 GMT Daylight Time 2001 -->
+  </body>
+</html>
