@@ -170,15 +170,8 @@
 인라인 이미지는 `대체 정의`_ 내부의 "image" 명령어로 정의될 수 있다
 
 이미지 소스파일의 URI는 명령어 인수에 명시된다. 이미지 URI는 하이퍼링크의 대상으로서
-들여쓰여진 텍스트 블럭 바로 뒤에 오거나
-링크 블럭에 여러개의 줄이 있다면
-The URI for the image source file is specified in the directive
-argument.  As with hyperlink targets, the image URI may begin on the
-same line as the explicit markup start and target name, or it may
-begin in an indented text block immediately following, with no
-intervening blank lines.  If there are multiple lines in the link
-block, they are stripped of leading and trailing whitespace and joined
-together.
+마크업 명시가 시작되는 줄 혹은 곧바로 이어지는 들여쓴 텍스트 블럭에서 시작한다.
+(사이에 공백행은 오지 않는다.) 링크 블럭에 여러줄이 있다면 공백을 없애 합쳐진다.
 
 선택적으로 이미지 링크 블럭은 _`이미지 옵션` 이라는 단순 필드 리스트를 포함할 수 있다. 예시 ::
 

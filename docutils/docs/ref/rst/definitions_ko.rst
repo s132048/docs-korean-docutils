@@ -25,11 +25,11 @@ __ directives_ko.html#include
 ============
 
 다수의 표준 정의 파일들은 문서 내부의 `대체 레퍼런스`__ 를 통해 사용할 수 있는 `대체 정의`__ 의 묶음을 포함한다.
-예를 들어 저작권 기호는 "사본"으로 ``isonum_ko.txt`` 에 저장되어 있다.::
+예를 들어 저작권 기호는 "copy"으로 ``isonum_ko.txt`` 에 저장되어 있다.::
 
     .. include:: <isonum.txt>
 
-    저작권 |사본| 2003 by John Q. Public, 판권소유.
+    저작권 |copy| 2003 by John Q. Public, 판권소유.
 
 __ restructuredtext_ko.html#substitution-definitions
 __ restructuredtext_ko.html#substitution-references
@@ -48,11 +48,11 @@ __ restructuredtext_ko.html#substitution-references
 커스텀 대체 정의는 `"unicode" 명령어`__ 를 사용할 수 있다.
 공백은 무시되거나 삭제되어 실제로는 텍스트에 녹아든다.::
 
-    .. |사본|   unicode:: U+000A9 .. COPYRIGHT SIGN
+    .. |copy|   unicode:: U+000A9 .. COPYRIGHT SIGN
     .. |BogusMegaCorp (TM)| unicode:: BogusMegaCorp U+2122
        .. with trademark sign
 
-    저작권 |사| 2003, |BogusMegaCorp (TM)|.
+    저작권 |copy| 2003, |BogusMegaCorp (TM)|.
 
 __ directives_ko.html#unicode
 

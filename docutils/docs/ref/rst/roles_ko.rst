@@ -25,12 +25,7 @@ default-role_ 명령어로 변경될 수 있다.
 `reStructuredText 마크업 설명서`_ 의 `해석 텍스트`_ 섹션을 보면 문법적인 세부사항을 알 수 있다.
 요소 계층에 대한 세부사항은 `Docutils 문서 계층`_ 과 `Docutils 포괄 DTD`_ XML 문서 타입 정의를 보자.
 해석 텍스트 기능 구현에 대한 세부사항은 `reStructuredText 해석 텍스트 기능 생성`_ 을 참고하자.
-See the `Interpreted Text`_ section in the `reStructuredText Markup
-Specification`_ for syntax details.  For details on the hierarchy of
-elements, please see `The Docutils Document Tree`_ and the `Docutils
-Generic DTD`_ XML document type definition.  For interpreted text role
-implementation details, see `Creating reStructuredText Interpreted
-Text Roles`_.
+
 
 .. _"role" directive: directives.html#role
 .. _default-role: directives.html#default-role
